@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Recipe Title</title>
+</head>
+<body>
+
+<h1>Recipe Title</h1>
+
+<h2>Ingredients</h2>
+<ul>
+    <li id="Ingredient 1">Ingredient 1</li>
+    <li id="Ingredient 2">Ingredient 2</li>
+    <li id="Ingredient 3">Ingredient 3</li>
+</ul>
+
+<button onclick="convertTempToCelsuis()">C&deg</button>
+<button onclick="convertTempToFarenheit()">F&deg</button>
+<h3>Directions</h3>
+<ol>
+    <li id="Step 1">Preheat the oven to 350 degrees Fahrenheit</li>
+    <li id="Step 2">Mix the ingredients together</li>
+    <li id="Step 3">Bake for 30 minutes</li>
+</ol>
+<p>Enter the temperature in Farheit that you wish to convert to Celsuis</p>
+<form>
+    <label for="FTemp">Temp (F):</label>
+    <input type="number" id="FTemp" name="FTemp"><br><br>
+    <label for="CTemp">Temp (C):</label>
+    <input type="number" id="CTemp" name="CTemp"><br>
+</form>
+<script>
+function convertTempToCelsuis() {
+    var FTemp = document.getElementById("FTemp").value;
+    var CTemp = ((FTemp - 32) / (9/5)).toFixed(2);
+    document.getElementById("Step 1").innerHTML = "Preheat the oven to " + CTemp + " degrees Celsuis";
+}
+
+function convertTempToFarenheit() {
+    var CTemp = document.getElementById("CTemp").value;
+    var FTemp = ((CTemp * (9/5)) + 32).toFixed(0);
+    document.getElementById("Step 1").innerHTML = "Preheat the oven to " + FTemp + " degrees Fahrenheit";
+}
+</script>
+</body>
+</html>

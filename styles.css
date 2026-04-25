@@ -1,0 +1,25 @@
+button {
+    background-color: #992900;
+    color: #F9EFEC;
+}
+
+.nav{
+    background-color: #992900;
+    color: #F9EFEC;
+    width: 100vw;
+    height: 12vh;
+    margin-top: 0;
+    font-family: 'Labrada', serif;
+}
+
+body{
+    background-color: #F9EFEC;
+    padding: 0;
+    margin: 0;
+}
+
+a{
+    color: #F9EFEC;
+    text-decoration: none;
+}
+
