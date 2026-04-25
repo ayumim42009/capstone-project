@@ -1,21 +1,39 @@
+
 button {
     background-color: #992900;
     color: #F9EFEC;
+    font-family: 'Roboto', sans-serif;
 }
 
-.nav{
+.header{
     background-color: #992900;
     color: #F9EFEC;
     width: 100vw;
     height: 12vh;
     margin-top: 0;
     font-family: 'Labrada', serif;
+    font-weight: bold;
 }
+
+.nav{
+    display: fixed;
+    padding-left: 500px;
+    padding-bottom: 50px;
+}
+
+.logo{
+     font-size: 25px;
+     margin: 0;
+     padding-top: 25px;
+     padding-left: 20px;
+}
+
 
 body{
     background-color: #F9EFEC;
     padding: 0;
     margin: 0;
+    font-family: 'Roboto', serif;
 }
 
 a{
