@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home — resipi</title>
+  
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+    /* page-specific styles */
+
+    /* main page with a sidebar */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px; 
+      min-height: calc(100vh - 61px);
+    }
+
+    /* main page - left side */
+    .recipe-content {
+      padding: 2rem 4rem;
+    }
+
+    .section-title {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #3D1500;
+      margin-bottom: 2rem;
+    }
+
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 per row */
+      gap: 2rem;
+    }
+
+    .recipe-card {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .recipe-img-square {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 0.8rem;
+    }
+
+    .placeholder-img {
+      background-color: #D6CEC8;
+    }
+
+    .recipe-card-title {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #2C1A0E;
+      margin-bottom: 0.4rem;
+    }
+
+    .stars {
+      color: #992900;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+    }
+
+    /* sidebar */
+    .sidebar {
+      background-color: #EBE3DF; 
+      padding: 2rem;
+      border-left: 1px solid #D6CEC8;
+    }
+
+    .sidebar-title {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2C1A0E;
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-group-title {
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #2C1A0E;
+      margin-bottom: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .filter-label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.9rem;
+      color: #2C1A0E;
+      margin-bottom: 0.6rem;
+      cursor: pointer;
+    }
+
+    .filter-label input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      accent-color: #992900; /* tints when clicked */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">resipi</div>
+    <div class="nav">
+      <a href="index.html">home</a> 
+      <a href="addRecipe.html">add recipe</a> 
+      <a href="tempConversion.html">conversion</a> 
+      <div class="nav-right"> 
+        <input type="text" placeholder="Search for recipe"> 
+        <button class="icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button> 
+        <button class="icon">&#9776;</button> 
+      </div> 
+    </div>
+  </div>
+
+  <div class="main-layout">
+    
+    <div class="recipe-content">
+      <h1 class="section-title">My Recipes</h1>
+      
+      <div class="recipe-grid">
+        
+        <div class="recipe-card">
+          <img src="images/Lemon-Ricotta-Cookies-5.jpg" alt="Lemon Ricotta Cookies with Lemon Glaze" class="recipe-img-square">
+          <h3 class="recipe-card-title">Lemon Ricotta Cookies<div> with Lemon Glaze</h3>
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-img-square placeholder-img"></div>
+          <h3 class="recipe-card-title">Lorem Ipsum</h3>
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-img-square placeholder-img"></div>
+          <h3 class="recipe-card-title">Lorem Ipsum</h3>
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-img-square placeholder-img"></div>
+          <h3 class="recipe-card-title">Lorem Ipsum</h3>
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        </div>
+        
+        <div class="recipe-card">
+          <div class="recipe-img-square placeholder-img"></div>
+          <h3 class="recipe-card-title">Lorem Ipsum</h3>
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-img-square placeholder-img"></div>
+          <h3 class="recipe-card-title">Lorem Ipsum</h3>
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-img-square placeholder-img"></div>
+          <h3 class="recipe-card-title">Lorem Ipsum</h3>
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-img-square placeholder-img"></div>
+          <h3 class="recipe-card-title">Lorem Ipsum</h3>
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <h3 class="sidebar-title">Filters</h3>
+      
+      <h4 class="filter-group-title">Dietary Restrictions:</h4>
+      <label class="filter-label"><input type="checkbox"> Gluten-free</label>
+      <label class="filter-label"><input type="checkbox"> Vegan</label>
+      <label class="filter-label"><input type="checkbox"> Nut-free</label>
+      <label class="filter-label"><input type="checkbox"> Soy-free</label>
+      <label class="filter-label"><input type="checkbox"> Dairy-free</label>
+      
+      <h4 class="filter-group-title">Recipe Type:</h4>
+      <label class="filter-label"><input type="checkbox"> Dessert</label>
+      <label class="filter-label"><input type="checkbox"> Entree</label>
+      <label class="filter-label"><input type="checkbox"> Appetizer</label>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> download recipe — resipi</title>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    /*page specific styles */
+
+    /* center content vertically */
+    .page-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 61px);
+      gap: 1.25rem;
+      padding: 2rem;
+    }
+
+    /* overwrite heading font*/
+    .page-heading {
+      font-family: 'Roboto', sans-serif;
+      font-style: normal;
+    }
+
+    .recipe-img {
+      width: 280px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    /* progress bar */
+    .progress-wrap {
+      width: 280px;
+      background: #e0cfc8;
+      border-radius: 20px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #992900;
+      border-radius: 20px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-label {
+      font-size: 0.8rem;
+      color: #8B6A55;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    /* review button — appears after recipe is downloaded */
+    .review-btn {
+      display: none;
+    }
+
+    .review-btn.visible {
+      display: block;
+    }
+
+    /* Spinner animation */
+    .spinner {
+      width: 28px;
+      height: 28px;
+      border: 3px solid #e0cfc8;
+      border-top-color: #992900;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: block;
+    }
+
+    .spinner.hidden {
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+   <div class="header">
+    <div class="logo">resipi</div>
+    <div class="nav">
+      <a href="index.html">home</a> 
+      <a href="addRecipe.html">add recipe</a> 
+      <a href="tempConversion.html">conversion</a> 
+      <div class="nav-right"> 
+        <input type="text" placeholder="Search for recipe"> 
+        <button class="icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button> 
+        <button class="icon">&#9776;</button> 
+      </div> 
+    </div>
+  </div>
+
+  <div class="page-content">
+    <h1 class="page-heading" id="status-heading">Downloading Your Recipe...</h1>
+    
+    <img class="recipe-img" id="recipe-img" src="images/downloading_recipe.jpg" alt="Recipe Image">
+    
+    <div class="progress-wrap" id="progress-wrap">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <span class="progress-label" id="progress-label">0%</span>
+    
+    <div class="spinner" id="spinner"></div>
+    
+    <button class="action-btn review-btn" id="review-btn" onclick="goToReview()">
+      Review Recipe
+    </button>
+  </div>
+
+  <script>
+    // Simulate download progress
+    let progress = 0;
+    const bar = document.getElementById('progress-bar');
+    const label = document.getElementById('progress-label');
+    const spinner = document.getElementById('spinner');
+    const reviewBtn = document.getElementById('review-btn');
+    const heading = document.getElementById('status-heading');
+    const progressWrap = document.getElementById('progress-wrap');
+
+    const interval = setInterval(() => {
+      progress += Math.random() * 12 + 3; 
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(interval);
+        onDownloadComplete();
+      }
+      bar.style.width = progress + '%';
+      label.textContent = Math.floor(progress) + '%';
+    }, 300);
+
+    function onDownloadComplete() {
+      spinner.classList.add('hidden'); // hide spinner
+      progressWrap.style.display = 'none'; // hide progress bar
+      label.style.display = 'none'; // hide percentage label
+      heading.textContent = 'Your Recipe is Ready!'; // update heading
+      reviewBtn.classList.add('visible'); // show review button
+    }
+
+    function goToReview() {
+      window.location.href = 'displayRecipe.html'; 
+    }
+  </script>
+
+</body>
+</html>

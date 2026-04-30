@@ -1,46 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Recipe Title</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Conversion — resipi</title>
+  
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+    /* ── Page-specific styles only ── */
+    
+    .page-content {
+      margin: 0;
+      padding: 2rem 3rem;
+      max-width: 800px;
+    }
+
+
+    h2 {
+      font-family: 'Roboto', sans-serif;
+      color: #2C1A0E;
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    p {
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      font-family: 'Roboto', sans-serif;
+      color: #2C1A0E;
+    }
+
+    ul, ol {
+      margin-left: 2rem;
+      margin-bottom: 1.5rem;
+      font-family: 'Roboto', sans-serif;
+      color: #2C1A0E;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+      line-height: 1.5;
+    }
+
+    .temp-btn {
+      background-color: #992900;
+      color: #F9EFEC;
+      border: none;
+      padding: 6px 16px;
+      margin-right: 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .temp-btn:hover {
+      background-color: #8e2600;
+    }
+
+    .page-content input[type="text"] {
+      float: none;
+      margin: 0 0 10px 10px;
+      display: inline-block;
+      width: 150px;
+    }
+    
+    .input-group {
+      margin-bottom: 0.5rem;
+      font-family: 'Roboto', sans-serif;
+      color: #2C1A0E;
+    }
+
+
+    /* temp input */
+    .temp-input {
+      width: 100%;
+      max-width: 420px;
+      padding: 0.65rem 1rem;
+      border: 1px solid #D4B89A;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-family: 'Roboto', sans-serif;
+      background: #fff;
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Recipe Title</h1>
+  <div class="header">
+    <div class="logo">resipi</div>
+    <div class="nav">
+      <a href="index.html">home</a> 
+      <a href="addRecipe.html">add recipe</a> 
+      <a href="tempConversion.html">conversion</a> 
+      <div class="nav-right"> 
+        <input type="text" placeholder="Search for recipe"> 
+        <button class="icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button> 
+        <button class="icon">&#9776;</button> 
+      </div> 
+    </div>
+  </div>
 
-<h2>Ingredients</h2>
-<ul>
-    <li id="Ingredient 1">Ingredient 1</li>
-    <li id="Ingredient 2">Ingredient 2</li>
-    <li id="Ingredient 3">Ingredient 3</li>
-</ul>
+  <div class="page-content">
+    
+    <h1>Recipe Title</h1>
+    
+    <h2>Ingredients</h2>
+    <ul>
+      <li>Ingredient 1</li>
+      <li>Ingredient 2</li>
+      <li>Ingredient 3</li>
+    </ul>
 
-<button onclick="convertTempToCelsuis()">C&deg</button>
-<button onclick="convertTempToFarenheit()">F&deg</button>
-<h3>Directions</h3>
-<ol>
-    <li id="Step 1">Preheat the oven to 350 degrees Fahrenheit</li>
-    <li id="Step 2">Mix the ingredients together</li>
-    <li id="Step 3">Bake for 30 minutes</li>
-</ol>
-<p>Enter the temperature in Farheit that you wish to convert to Celsuis</p>
-<form>
-    <label for="FTemp">Temp (F):</label>
-    <input type="number" id="FTemp" name="FTemp"><br><br>
-    <label for="CTemp">Temp (C):</label>
-    <input type="number" id="CTemp" name="CTemp"><br>
-</form>
-<script>
-function convertTempToCelsuis() {
-    var FTemp = document.getElementById("FTemp").value;
-    var CTemp = ((FTemp - 32) / (9/5)).toFixed(2);
-    document.getElementById("Step 1").innerHTML = "Preheat the oven to " + CTemp + " degrees Celsuis";
-}
+    <button class="temp-btn">C&deg;</button> 
+    <button class="temp-btn">F&deg;</button>
 
-function convertTempToFarenheit() {
-    var CTemp = document.getElementById("CTemp").value;
-    var FTemp = ((CTemp * (9/5)) + 32).toFixed(0);
-    document.getElementById("Step 1").innerHTML = "Preheat the oven to " + FTemp + " degrees Fahrenheit";
-}
-</script>
+    <h2>Directions</h2>
+    <ol>
+      <li>Preheat the oven to 350 degrees Fahrenheit</li>
+      <li>Mix the ingredients together</li>
+      <li>Bake for 30 minutes</li>
+    </ol>
+
+    <p>Enter the temperature in Fahrenheit that you wish to convert to Celsius</p>
+    
+    <div class="input-group">
+      <label>Temp (F): <input class="temp-input" type="text"></label>
+    </div>
+    <div class="input-group">
+      <label>Temp (C):<input class="temp-input" type="text"></label>
+    </div>
+
+  </div>
+
 </body>
 </html>
