@@ -17,3 +17,8 @@ async function execPythonScript() {
     const data = await response.json();
     console.log(data.output);
 }
+
+async function handleButtonClick(){
+    await execPythonScript();
+    window.location.href = 'downloadRecipe.html';
+}
