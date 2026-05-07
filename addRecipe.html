@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> adding page — resipi</title>
   <link rel="stylesheet" href="css/styles.css">
-  <script src="script.js" defer></script> 
+  <script src="script.js"></script> 
+  <link
+  rel="stylesheet"
+  href="https://pyscript.net/alpha/pyscript.css" />
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
   <style>
     /* page-specific styles */
 
@@ -68,10 +72,17 @@
   <div class="page-content">
     <h1 class="page-heading">Paste Your Recipe</h1>
     <input class="recipe-input" type="text" placeholder="Paste your link here...">
-    <button class="action-btn" onclick="handleButtonClick()">
+    <button class="action-btn" onclick="writeRecipeJSON(document.querySelector('.recipe-input').value,'','','');  handleButtonClick();">
       Download
     </button>
   </div>
 
+  <py-script>
+    from pyscript import when, display
+
+    @when("click", "#action-btn")
+    def click_handler(event):
+        print("The button was clicked!")
+</py-script>
 </body>
 </html>
