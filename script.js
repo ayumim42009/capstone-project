@@ -10,7 +10,8 @@ console.log(data);
 //return data;
 }*/
 
-async function redirectToDownload() {
+function redirectToDownload() {
+    await recipeData(URL,'', [], {}); 
     window.location.href = 'downloadRecipe.html';
 }
 
