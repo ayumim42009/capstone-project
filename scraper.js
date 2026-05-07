@@ -53,6 +53,7 @@ async function scrape() {
         });
 
     const recipe = {
+        URL,
         name,
         ingredients,
         instructions
