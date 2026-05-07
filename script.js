@@ -10,15 +10,11 @@ console.log(data);
 //return data;
 }*/
 
-async function handleButtonClick() {
-    //runScript();
-
-    //fetchData(result);
-
+async function redirectToDownload() {
     window.location.href = 'downloadRecipe.html';
 }
 
-async function sendData(URL, name, ingredients, instructions) {
+async function recipeData(URL, name, ingredients, instructions) {
     const response = await fetch("https://pgvh253inp3c4wkphsv2uwrequ0zzjwe.lambda-url.us-east-2.on.aws/",
      {
         method: "POST",
