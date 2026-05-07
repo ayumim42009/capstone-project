@@ -11,3 +11,9 @@ console.log(data);
          return console.error("Error", error);
      }
 }
+
+async function execPythonScript() {
+    const response = await fetch('/resipi.py');
+    const data = await response.json();
+    console.log(data.output);
+}
