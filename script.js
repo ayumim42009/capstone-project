@@ -11,7 +11,7 @@ console.log(data);
 }*/
 
 function redirectToDownload() {
-    await recipeData(URL,'', [], {}); 
+    //await recipeData(URL,'', [], {}); 
     window.location.href = 'downloadRecipe.html';
 }
 
