@@ -3,6 +3,7 @@ import cors from "cors";
 import fs from "fs";
 import * as cheerio from "cheerio";
 import cloudscraper from "cloudscraper";
+import serverless from "serverless-http";
 
 const app = express();
 
@@ -69,7 +70,7 @@ app.post("/scrape", async (req, res) => {
         };
 
         fs.writeFileSync(
-            "recipe.json",
+            "/tmp/recipe.json",
             JSON.stringify(recipe, null, 4)
         );
 
@@ -85,6 +86,10 @@ app.post("/scrape", async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
+
+
+/*app.listen(3000, () => {
     console.log("Server running on port 3000");
-});
+});*/
+
+export const handler = serverless(app);
