@@ -20,6 +20,7 @@
   "homepage": "https://github.com/ayumim42009/capstone-project#readme",
   "dependencies": {
     "cheerio": "^1.2.0",
-    "cloudscraper": "^4.6.0"
+    "cloudscraper": "^4.6.0",
+    "express": "^5.2.1"
   }
 }

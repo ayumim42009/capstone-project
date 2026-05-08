@@ -2,7 +2,20 @@ import * as cheerio from 'cheerio';
 import fs from 'fs';
 import cloudscraper from 'cloudscraper';
 
-const URL = "https://www.allrecipes.com/recipe/279991/lemony-almond-ricotta-cookies/";
+//This file is for testing and should not be referenced
+//refer to the script.js for the function
+
+// const URL = "https://www.allrecipes.com/recipe/279991/lemony-almond-ricotta-cookies/";
+
+var submitButton = document.getElementById("submit-button");
+if (submitButton.addEventListener) {
+    submitButton.addEventListener("click", scrape, false);
+    submitButton.addEventListener("click", redirectToDownload, false);
+}
+else if (submitButton.attachEvent) {
+    submitButton.attachEvent("onclick", scrape);
+}
+
 
 const numberWords = [
     "One", "Two", "Three", "Four",
@@ -15,7 +28,9 @@ const numberWords = [
 
 async function scrape() {
 
-    const html = await cloudscraper.get(URL);
+    const HTMLURL = document.getElementById("input").getElementsByClassName("recipe-input")[0].value;
+
+    const html = await cloudscraper.get(HTMLURL);
 
     const $ = cheerio.load(html);
 
@@ -53,7 +68,7 @@ async function scrape() {
         });
 
     const recipe = {
-        URL,
+        HTMLURL,
         name,
         ingredients,
         instructions

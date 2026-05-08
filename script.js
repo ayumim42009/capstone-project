@@ -10,6 +10,70 @@ console.log(data);
 //return data;
 }*/
 
+const submitButton = document.getElementById("submit-button");
+
+submitButton.addEventListener("click", scrape);
+
+async function scrape() {
+
+    const HTMLURL =
+        document
+            .getElementById("recipe-input").value;
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:3000/scrape",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    url: HTMLURL
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        console.log(data);
+
+        downloadJSON(data);
+
+    } catch (error) {
+
+        console.error(error);
+    }
+}
+
+function downloadJSON(data) {
+
+    const blob = new Blob(
+        [JSON.stringify(data, null, 4)],
+        {
+            type: "application/json"
+        }
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = "recipe.json";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
+}
+
+
+//other functions to send data to database and redirect to download page
 function redirectToDownload() {
     //await recipeData(URL,'', [], {}); 
     window.location.href = 'downloadRecipe.html';
