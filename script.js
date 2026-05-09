@@ -10,10 +10,6 @@ console.log(data);
 //return data;
 }*/
 
-const submitButton = document.getElementById("submit-button");
-
-submitButton.addEventListener("click", scrape);
-
 async function scrape() {
 
     const HTMLURL =
@@ -46,6 +42,12 @@ async function scrape() {
         console.error(error);
     }
 }
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const submitButton = document.getElementById("submit-button");
+      submitButton.addEventListener("click", scrape);
+    });
 
 function downloadJSON(data) {
 
