@@ -44,10 +44,8 @@ async function scrape() {
 }
 
 
-    document.addEventListener("DOMContentLoaded", function() {
       const submitButton = document.getElementById("submit-button");
       submitButton.addEventListener("click", scrape);
-    });
 
 function downloadJSON(data) {
 
