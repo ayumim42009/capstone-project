@@ -23,7 +23,7 @@ async function scrape() {
     try {
 
         const response = await fetch(
-            "https://yydwq3zeq6kjx2x3a7h7urqyq40xfhne.lambda-url.us-east-2.on.aws/scrape",
+            "https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/server/scrape",
             {
                 method: "POST",
                 headers: {
