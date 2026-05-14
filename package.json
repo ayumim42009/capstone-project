@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ayumim42009/capstone-project#readme",
   "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.1047.0",
     "cheerio": "^1.2.0",
     "cloudscraper": "^4.6.0",
     "cors": "^2.8.6",
