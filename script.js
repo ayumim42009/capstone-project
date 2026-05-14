@@ -44,8 +44,22 @@ async function scrape() {
 }
 
 
+const testRecipe = {
+    "url": "https://test",
+    "name": "Test Recipe",
+    "ingredients": [
+        "1 cup of test ingredient 1",
+        "2 cups of test ingredient 2",
+    ],
+    "instructions": {
+        "step1": "Test instruction 1",
+        "step2": "Test instruction 2"
+    }
+}
+
 const submitButton = document.getElementById("submit-button");
-submitButton.addEventListener("click", scrape);
+//submitButton.addEventListener("click", scrape);
+submitButton.addEventListener("click", sendRecipeData(testRecipe.url, testRecipe.name, testRecipe.ingredients, testRecipe.instructions));
 
 function downloadJSON(data) {
 
