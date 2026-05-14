@@ -119,8 +119,8 @@ async function sendRecipeData(URL, name, ingredients, instructions) {
     return result;
 }
 
-const submitButton = document.getElementById("submit-button");
-submitButton.addEventListener("click", sendRecipeData(testRecipe.url, testRecipe.name, testRecipe.ingredients, testRecipe.instructions));
+//const submitButton = document.getElementById("submit-button");
+//submitButton.addEventListener("click", sendRecipeData(testRecipe.url, testRecipe.name, testRecipe.ingredients, testRecipe.instructions));
 
 // This function reads the recipe data from the database based on the recipe title
 async function readRecipeData(URL, name, ingredients, instructions) {
@@ -175,6 +175,9 @@ async function testConnection() {
     console.log("Success:", result);
     return result;
 }
+
+const submitButton = document.getElementById("submit-button");
+submitButton.addEventListener("click", testConnection);
 
 /*async function runScript(){
     const response = await fetch("https://pgvh253inp3c4wkphsv2uwrequ0zzjwe.lambda-url.us-east-2.on.aws/");
