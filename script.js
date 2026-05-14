@@ -107,7 +107,7 @@ async function sendRecipeData(URL, name, ingredients, instructions) {
 }
 
 // This function reads the recipe data from the database based on the recipe title
-async function sendRecipeData(URL, name, ingredients, instructions) {
+async function readRecipeData(URL, name, ingredients, instructions) {
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/readRecipe",
      {
         method: "GET",
