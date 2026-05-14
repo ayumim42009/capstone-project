@@ -57,9 +57,8 @@ const testRecipe = {
     }
 }
 
-const submitButton = document.getElementById("submit-button");
+//const submitButton = document.getElementById("submit-button");
 //submitButton.addEventListener("click", scrape);
-submitButton.addEventListener("click", sendRecipeData(testRecipe.url, testRecipe.name, testRecipe.ingredients, testRecipe.instructions));
 
 function downloadJSON(data) {
 
@@ -119,6 +118,9 @@ async function sendRecipeData(URL, name, ingredients, instructions) {
     console.log("Success:", result);
     return result;
 }
+
+const submitButton = document.getElementById("submit-button");
+submitButton.addEventListener("click", sendRecipeData(testRecipe.url, testRecipe.name, testRecipe.ingredients, testRecipe.instructions));
 
 // This function reads the recipe data from the database based on the recipe title
 async function readRecipeData(URL, name, ingredients, instructions) {
