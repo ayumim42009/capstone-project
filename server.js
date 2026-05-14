@@ -99,7 +99,7 @@ app.get("/readRecipe", (req, res) => {
           });
           // 2. Perform database operations (e.g., query, insert)
           const [rows, fields] = await connection.execute('SELECT name FROM recipes WHERE name = ?',
-            [res.name]);
+            [req.name]);
       } catch (error) {
           console.error("Error connecting to database:", error);
       } finally {
@@ -122,7 +122,8 @@ app.get("/readRecipe", (req, res) => {
               database: credentials.dbname
           });
           // 2. Perform database operations (e.g., query, insert)
-          const [rows, fields] = await connection.execute('INSERT * FROM users;');
+          const [rows, fields] = await connection.execute(`INSERT INTO recipes (url, name, ingredients, instructions)
+            VALUES(req.body.url, req.body.name, JSON.stringify(req.body.ingredients), JSON.stringify(req.body.instructions)`);
       } catch (error) {
           console.error("Error connecting to database:", error);
       } finally {
