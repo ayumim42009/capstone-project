@@ -149,6 +149,33 @@ async function readRecipeData(URL, name, ingredients, instructions) {
     return result;
 }
 
+// This function tests the connection to the database
+async function testConnection() {
+    const response = await fetch("https://pgvh253inp3c4wkphsv2uwrequ0zzjwe.lambda-url.us-east-2.on.aws/testConnection",
+     {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            url: URL,
+            name: name,
+            ingredients: ingredients,
+            instructions: instructions
+        })
+    });
+
+    if(!response.ok){
+       const text = await response.text();
+       console.error("Lambda response:", text);
+       throw new Error(`HTTP error ${response.status}: ${text}`);
+    }
+
+    const result = await response.json();
+    console.log("Success:", result);
+    return result;
+}
+
 /*async function runScript(){
     const response = await fetch("https://pgvh253inp3c4wkphsv2uwrequ0zzjwe.lambda-url.us-east-2.on.aws/");
     const data = await response.json();
