@@ -10,6 +10,43 @@ console.log(data);
 //return data;
 }*/
 
+// Use this code snippet in your app.
+// If you need more information about configurations or implementing the sample code, visit the AWS docs:
+// https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/getting-started.html
+
+import {
+  SecretsManagerClient,
+  GetSecretValueCommand,
+} from "@aws-sdk/client-secrets-manager";
+
+function getSecret(){
+    const secret_name = "prod/MySQLCred";
+
+    const client = new SecretsManagerClient({
+    region: "us-east-2",
+    });
+
+    let response;
+
+    try {
+    response = await client.send(
+        new GetSecretValueCommand({
+        SecretId: secret_name,
+        VersionStage: "AWSCURRENT", // VersionStage defaults to AWSCURRENT if unspecified
+        })
+    );
+    } catch (error) {
+    // For a list of exceptions thrown, see
+    // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+    throw error;
+    }
+
+    const secret = response.SecretString;
+
+    // Your code goes here
+    console.log(secret);
+}
+
 async function scrape() {
 
     const HTMLURL =
@@ -79,7 +116,7 @@ function redirectToDownload() {
     window.location.href = 'downloadRecipe.html';
 }
 
-async function recipeData(URL, name, ingredients, instructions) {
+/*async function recipeData(URL, name, ingredients, instructions) {
     const response = await fetch("https://pgvh253inp3c4wkphsv2uwrequ0zzjwe.lambda-url.us-east-2.on.aws/",
      {
         method: "POST",
@@ -103,10 +140,11 @@ async function recipeData(URL, name, ingredients, instructions) {
     const result = await response.json();
     console.log("Success:", result);
     return result;
-}
+}*/
 
-async function runScript(){
+/*async function runScript(){
     const response = await fetch("https://pgvh253inp3c4wkphsv2uwrequ0zzjwe.lambda-url.us-east-2.on.aws/");
     const data = await response.json();
     console.log(data);
-}
+}*/
+
