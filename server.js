@@ -86,7 +86,7 @@ const data = {
 };*/
 
 app.get("/readRecipe", (req, res) => {
-    const secret = await getSecret();
+    const secret = getSecret();
     const credentials = JSON.parse(secret);
   
       try{
@@ -109,7 +109,7 @@ app.get("/readRecipe", (req, res) => {
     res.json({ message: "OK" });
   });
 
-  app.post("/addRecipe", (req, res) => {
+  app.post("/addRecipe", async (req, res) => {
     const secret = await getSecret();
     const credentials = JSON.parse(secret);
   
