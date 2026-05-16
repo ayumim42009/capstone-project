@@ -123,7 +123,7 @@ async function sendRecipeData(URL, name, ingredients, instructions) {
 //submitButton.addEventListener("click", sendRecipeData(testRecipe.url, testRecipe.name, testRecipe.ingredients, testRecipe.instructions));
 
 // This function reads the recipe data from the database based on the recipe title
-async function readRecipeData(URL, name, ingredients, instructions) {
+async function readRecipeData(name) {
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/readRecipe",
         {
             method: "GET",
@@ -131,10 +131,7 @@ async function readRecipeData(URL, name, ingredients, instructions) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                url: URL,
-                name: name,
-                ingredients: ingredients,
-                instructions: instructions
+                name: name
             })
         });
 
@@ -287,3 +284,6 @@ console.log(instructionData);
 
 const submitButton = document.getElementById("submit-button");
 submitButton.addEventListener("click", sendRecipeData("", nameData, ingredientData, instructionData));
+
+const submitButton = document.getElementById("submit-button");
+submitButton.addEventListener("click", readRecipeData(nameData));
