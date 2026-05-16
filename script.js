@@ -262,4 +262,6 @@ const instructionData = Array.from(instructionsFormData.values());
 console.log(instructionData);
 
 const submitButton = document.getElementById("submit-button");
-submitButton.addEventListener("click", sendRecipeData("", nameData, ingredientData, instructionData)).addEventListener("click", readRecipeData(nameData));
+submitButton.addEventListener("click", sendRecipeData("", nameData, ingredientData, instructionData));
+//for next week
+//.addEventListener("click", readRecipeData(nameData))
