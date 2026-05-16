@@ -249,19 +249,26 @@ function removeInstruction() {
 addInstructionButton.addEventListener("click", addInstruction);
 removeInstructionButton.addEventListener("click", removeInstruction);
 
-// takes the data from the form
-const nameData = document.getElementById("recipe-name").value;
-console.log(nameData);
 
-const ingredientFormData = new FormData(document.querySelector("form[name='ingredient-form']"));
-const ingredientData = Array.from(ingredientFormData.values());
-console.log(ingredientData);
+//for testing
+function printRecipeData() {
+    // takes the data from the form
+    const nameData = document.getElementById("recipe-name").value;
+    console.log(nameData);
 
-const instructionsFormData = new FormData(document.querySelector("form[name='instructions-form']"));
-const instructionData = Array.from(instructionsFormData.values());
-console.log(instructionData);
+    const ingredientFormData = new FormData(document.querySelector("form[name='ingredient-form']"));
+    const ingredientData = Array.from(ingredientFormData.values());
+    console.log(ingredientData);
+
+    const instructionsFormData = new FormData(document.querySelector("form[name='instructions-form']"));
+    const instructionData = Array.from(instructionsFormData.values());
+    console.log(instructionData);
+}
+
+
 
 const submitButton = document.getElementById("submit-button");
-submitButton.addEventListener("click", sendRecipeData("", nameData, ingredientData, instructionData));
+submitButton.addEventListener("click", printRecipeData);
 //for next week
+//sendRecipeData("", nameData, ingredientData, instructionData)
 //.addEventListener("click", readRecipeData(nameData))
