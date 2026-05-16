@@ -1,15 +1,3 @@
-
-/*async function fetchData(){
-    const response = await fetch("https://pgvh253inp3c4wkphsv2uwrequ0zzjwe.lambda-url.us-east-2.on.aws/");
-    const data = await response.json();
-    console.log(data);
-// Prints out the JSON file data to ensure that the information is all there
-console.log(data);
-//send data to database once it's created
-
-//return data;
-}*/
-
 async function scrape() {
 
     const HTMLURL =
@@ -173,15 +161,6 @@ async function testConnection() {
     return result;
 }
 
-const submitButton = document.getElementById("submit-button");
-submitButton.addEventListener("click", sendRecipeData);
-
-/*async function runScript(){
-    const response = await fetch("https://pgvh253inp3c4wkphsv2uwrequ0zzjwe.lambda-url.us-east-2.on.aws/");
-    const data = await response.json();
-    console.log(data);
-}*/
-
 /**
  * THIS CODE IS FOR MANUAL INPUT OF RECIPE DATA
  * 
@@ -283,7 +262,4 @@ const instructionData = Array.from(instructionsFormData.values());
 console.log(instructionData);
 
 const submitButton = document.getElementById("submit-button");
-submitButton.addEventListener("click", sendRecipeData("", nameData, ingredientData, instructionData));
-
-const submitButton = document.getElementById("submit-button");
-submitButton.addEventListener("click", readRecipeData(nameData));
+submitButton.addEventListener("click", sendRecipeData("", nameData, ingredientData, instructionData)).addEventListener("click", readRecipeData(nameData));
