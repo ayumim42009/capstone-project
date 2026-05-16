@@ -270,3 +270,6 @@ function removeInstruction() {
 addInstructionButton.addEventListener("click", addInstruction);
 removeInstructionButton.addEventListener("click", removeInstruction);
 
+const formData = new FormData(document.querySelector("form[name='recipe-form']"));
+const data = Array.from(formData.entries());
+console.log(data);
