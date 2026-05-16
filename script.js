@@ -177,7 +177,7 @@ async function testConnection() {
 }
 
 const submitButton = document.getElementById("submit-button");
-submitButton.addEventListener("click", testConnection);
+submitButton.addEventListener("click", sendRecipeData);
 
 /*async function runScript(){
     const response = await fetch("https://pgvh253inp3c4wkphsv2uwrequ0zzjwe.lambda-url.us-east-2.on.aws/");
