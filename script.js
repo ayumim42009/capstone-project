@@ -185,9 +185,12 @@ submitButton.addEventListener("click", sendRecipeData);
     console.log(data);
 }*/
 
-//adds the ingredients and instructions
+/**
+ * THIS CODE IS FOR MANUAL INPUT OF RECIPE DATA
+ * 
+ */
 
-//ingrdients
+//ingredients
 const addIngredientButton =
     document.getElementById("ingredient-add-button");
 const removeIngredientButton =
@@ -270,6 +273,17 @@ function removeInstruction() {
 addInstructionButton.addEventListener("click", addInstruction);
 removeInstructionButton.addEventListener("click", removeInstruction);
 
-const formData = new FormData(document.querySelector("form[name='recipe-form']"));
-const data = Array.from(formData.entries());
-console.log(data);
+// takes the data from the form
+const nameData = document.getElementById("recipe-name").value;
+console.log(nameData);
+
+const ingredientFormData = new FormData(document.querySelector("form[name='ingredient-form']"));
+const ingredientData = Array.from(ingredientFormData.values());
+console.log(ingredientData);
+
+const instructionsFormData = new FormData(document.querySelector("form[name='instructions-form']"));
+const instructionData = Array.from(instructionsFormData.values());
+console.log(instructionData);
+
+const submitButton = document.getElementById("submit-button");
+submitButton.addEventListener("click", sendRecipeData("", nameData, ingredientData, instructionData));
