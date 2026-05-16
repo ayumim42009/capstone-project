@@ -95,23 +95,23 @@ function redirectToDownload() {
 // This function sends the recipe data to the database
 async function sendRecipeData(URL, name, ingredients, instructions) {
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/addRecipe",
-     {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            url: URL,
-            name: name,
-            ingredients: ingredients,
-            instructions: instructions
-        })
-    });
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                url: URL,
+                name: name,
+                ingredients: ingredients,
+                instructions: instructions
+            })
+        });
 
-    if(!response.ok){
-       const text = await response.text();
-       console.error("Lambda response:", text);
-       throw new Error(`HTTP error ${response.status}: ${text}`);
+    if (!response.ok) {
+        const text = await response.text();
+        console.error("Lambda response:", text);
+        throw new Error(`HTTP error ${response.status}: ${text}`);
     }
 
     const result = await response.json();
@@ -125,23 +125,23 @@ async function sendRecipeData(URL, name, ingredients, instructions) {
 // This function reads the recipe data from the database based on the recipe title
 async function readRecipeData(URL, name, ingredients, instructions) {
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/readRecipe",
-     {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            url: URL,
-            name: name,
-            ingredients: ingredients,
-            instructions: instructions
-        })
-    });
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                url: URL,
+                name: name,
+                ingredients: ingredients,
+                instructions: instructions
+            })
+        });
 
-    if(!response.ok){
-       const text = await response.text();
-       console.error("Lambda response:", text);
-       throw new Error(`HTTP error ${response.status}: ${text}`);
+    if (!response.ok) {
+        const text = await response.text();
+        console.error("Lambda response:", text);
+        throw new Error(`HTTP error ${response.status}: ${text}`);
     }
 
     const result = await response.json();
@@ -152,23 +152,23 @@ async function readRecipeData(URL, name, ingredients, instructions) {
 // This function tests the connection to the database
 async function testConnection() {
     const response = await fetch("https://pgvh253inp3c4wkphsv2uwrequ0zzjwe.lambda-url.us-east-2.on.aws/testConnection",
-     {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            url: URL,
-            name: name,
-            ingredients: ingredients,
-            instructions: instructions
-        })
-    });
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                url: URL,
+                name: name,
+                ingredients: ingredients,
+                instructions: instructions
+            })
+        });
 
-    if(!response.ok){
-       const text = await response.text();
-       console.error("Lambda response:", text);
-       throw new Error(`HTTP error ${response.status}: ${text}`);
+    if (!response.ok) {
+        const text = await response.text();
+        console.error("Lambda response:", text);
+        throw new Error(`HTTP error ${response.status}: ${text}`);
     }
 
     const result = await response.json();
@@ -184,4 +184,89 @@ submitButton.addEventListener("click", testConnection);
     const data = await response.json();
     console.log(data);
 }*/
+
+//adds the ingredients and instructions
+
+//ingrdients
+const addIngredientButton =
+    document.getElementById("ingredient-add-button");
+const removeIngredientButton =
+    document.getElementById("ingredient-remove-button");
+const ingredientForm = document.getElementById("ingredient-form");
+
+let ingredientCount = 1;
+
+function addIngredient() {
+    ingredientCount++;
+
+    const label = document.createElement("label");
+    label.setAttribute("for", `ingredient${ingredientCount}`);
+    label.textContent = `Ingredient ${ingredientCount}:`;
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.id = `ingredient${ingredientCount}`;
+    input.name = `ingredient${ingredientCount}`;
+
+    const br = document.createElement("br");
+
+    ingredientForm.appendChild(label);
+    ingredientForm.appendChild(input);
+    ingredientForm.appendChild(br);
+}
+
+function removeIngredient() {
+    if (ingredientCount > 1) {
+        ingredientForm.removeChild(ingredientForm.lastChild);
+        ingredientForm.removeChild(ingredientForm.lastChild);
+        ingredientForm.removeChild(ingredientForm.lastChild);
+
+        ingredientCount--;
+    }
+}
+
+addIngredientButton.addEventListener("click", addIngredient);
+removeIngredientButton.addEventListener("click", removeIngredient);
+
+
+//instructions
+const addInstructionButton =
+    document.getElementById("instruction-add-button");
+const removeInstructionButton =
+    document.getElementById("instruction-remove-button");
+const instructionForm = document.getElementById("instructions-form");
+
+let instructionCount = 1;
+
+function addInstruction() {
+    instructionCount++;
+
+    const label = document.createElement("label");
+    label.setAttribute("for", `instructions${instructionCount}`);
+    label.textContent = `Step ${instructionCount}:`;
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.id = `instructions${instructionCount}`;
+    input.name = `instructions${instructionCount}`;
+
+    const br = document.createElement("br");
+
+    instructionForm.appendChild(label);
+    instructionForm.appendChild(input);
+    instructionForm.appendChild(br);
+}
+
+function removeInstruction() {
+    if (instructionCount > 1) {
+        instructionForm.removeChild(instructionForm.lastChild);
+        instructionForm.removeChild(instructionForm.lastChild);
+        instructionForm.removeChild(instructionForm.lastChild);
+
+        instructionCount--;
+    }
+}
+
+addInstructionButton.addEventListener("click", addInstruction);
+removeInstructionButton.addEventListener("click", removeInstruction);
 
