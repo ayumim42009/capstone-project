@@ -323,8 +323,8 @@ submitButton.addEventListener("click", sendRecipeData("", nameData, ingredientDa
 //for next week
 //.addEventListener("click", readRecipeData(nameData))
 
-const submitButton = document.getElementById("modify");
-submitButton.addEventListener("click", modifyRecipeData(nameData, ingredientData, instructionData));
+const modifyButton = document.getElementById("modify");
+modifyButton.addEventListener("click", modifyRecipeData(nameData, ingredientData, instructionData));
 
-const submitButton = document.getElementById("delete");
-submitButton.addEventListener("click", deleteRecipeData(nameData));
+const deleteButton = document.getElementById("delete");
+deleteButton.addEventListener("click", deleteRecipeData(nameData));
