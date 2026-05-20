@@ -159,7 +159,7 @@ async function modifyRecipeData(name, ingredients, instructions) {
     console.log("Success:", result);
     return result;
 }
-
+``
 // This function updates the recipe data from the database based on the recipe title
 async function readRecipeData(name) {
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/readRecipe",
@@ -319,7 +319,9 @@ function printRecipeData() {
 
 const submitButton = document.getElementById("submit-button");
 submitButton.addEventListener("click", printRecipeData);
-submitButton.addEventListener("click", sendRecipeData("", nameData, ingredientData, instructionData));
+submitButton.addEventListener("click", () => {
+    sendRecipeData("", nameData, ingredientData, instructionData);
+});
 //for next week
 //.addEventListener("click", readRecipeData(nameData))
 
