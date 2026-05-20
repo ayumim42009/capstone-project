@@ -329,4 +329,4 @@ const submitButton = document.getElementById("modify");
 submitButton.addEventListener("click", modifyRecipeData(nameData, ingredientData, instructionData));
 
 const submitButton = document.getElementById("delete");
-submitButton.addEventListener("click", deleteRecipeData(name));
+submitButton.addEventListener("click", deleteRecipeData(nameData));
