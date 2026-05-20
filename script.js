@@ -110,7 +110,57 @@ async function sendRecipeData(URL, name, ingredients, instructions) {
 //const submitButton = document.getElementById("submit-button");
 //submitButton.addEventListener("click", sendRecipeData(testRecipe.url, testRecipe.name, testRecipe.ingredients, testRecipe.instructions));
 
-// This function reads the recipe data from the database based on the recipe title
+// This function removes a recipe's entry in the databse based on the recipe title
+async function removeRecipeData(name) {
+    const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/removeRecipe",
+        {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name
+            })
+        });
+
+    if (!response.ok) {
+        const text = await response.text();
+        console.error("Lambda response:", text);
+        throw new Error(`HTTP error ${response.status}: ${text}`);
+    }
+
+    const result = await response.json();
+    console.log("Success:", result);
+    return result;
+}
+
+// This function removes a recipe's entry in the databse based on the recipe title
+async function modifyRecipeData(name, ingredients, instructions) {
+    const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/updateRecipe",
+        {
+            method: "PUSH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                ingredients: ingredients,
+                instructions: instructions
+            })
+        });
+
+    if (!response.ok) {
+        const text = await response.text();
+        console.error("Lambda response:", text);
+        throw new Error(`HTTP error ${response.status}: ${text}`);
+    }
+
+    const result = await response.json();
+    console.log("Success:", result);
+    return result;
+}
+
+// This function updates the recipe data from the database based on the recipe title
 async function readRecipeData(name) {
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/readRecipe",
         {
