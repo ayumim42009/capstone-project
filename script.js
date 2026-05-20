@@ -319,6 +319,14 @@ function printRecipeData() {
 
 const submitButton = document.getElementById("submit-button");
 submitButton.addEventListener("click", printRecipeData);
+
+
 //for next week
 //sendRecipeData("", nameData, ingredientData, instructionData)
 //.addEventListener("click", readRecipeData(nameData))
+
+const submitButton = document.getElementById("modify");
+submitButton.addEventListener("click", modifyRecipeData(nameData, ingredientData, instructionData));
+
+const submitButton = document.getElementById("delete");
+submitButton.addEventListener("click", deleteRecipeData(name));
