@@ -320,6 +320,9 @@ function printRecipeData() {
 const submitButton = document.getElementById("submit-button");
 submitButton.addEventListener("click", printRecipeData);
 submitButton.addEventListener("click", () => {
+    const nameData = document.getElementById("recipe-name").value;
+    const ingredientFormData = new FormData(document.querySelector("form[name='ingredient-form']"));
+    const ingredientData = Array.from(ingredientFormData.values());
     sendRecipeData("", nameData, ingredientData, instructionData);
 });
 //for next week
