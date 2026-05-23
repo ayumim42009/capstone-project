@@ -313,18 +313,19 @@ function printRecipeData() {
     const instructionsFormData = new FormData(document.querySelector("form[name='instructions-form']"));
     const instructionData = Array.from(instructionsFormData.values());
     console.log(instructionData);
+
+    //send the data to the database
+    sendRecipeData("", nameData, ingredientData, instructionData);
 }
 
 
 
 const submitButton = document.getElementById("submit-button");
 submitButton.addEventListener("click", printRecipeData);
-submitButton.addEventListener("click", () => {
-    const nameData = document.getElementById("recipe-name").value;
-    const ingredientFormData = new FormData(document.querySelector("form[name='ingredient-form']"));
-    const ingredientData = Array.from(ingredientFormData.values());
+/*submitButton.addEventListener("click", () => {
+    
     sendRecipeData("", nameData, ingredientData, instructionData);
-});
+});*/
 //for next week
 //.addEventListener("click", readRecipeData(nameData))
 
