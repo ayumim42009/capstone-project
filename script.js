@@ -343,8 +343,7 @@ function printRecipeData() {
     addRecipe();
 }
 
-
-const redirect = document.getElementsByClassName("recipe-card-title");
+const redirect = document.querySelector('.recipe-card-title');
 redirect.addEventListener("click", redirectToDisplay);
 
 const submitButton = document.getElementById("submit-button");
