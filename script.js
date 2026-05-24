@@ -218,6 +218,7 @@ async function testConnection() {
  * 
  */
 
+
 if(window.location.pathname.endsWith("recipeForm.html")) {
 
     //ingredients
@@ -302,6 +303,9 @@ if(window.location.pathname.endsWith("recipeForm.html")) {
 
     addInstructionButton.addEventListener("click", addInstruction);
     removeInstructionButton.addEventListener("click", removeInstruction);
+
+    const submitButton = document.getElementById("submit-button");
+    submitButton.addEventListener("click", printRecipeData);
 }
 
 function addRecipe() {
@@ -345,9 +349,6 @@ function printRecipeData() {
 
 const redirect = document.querySelector('.recipe-card-title');
 redirect.addEventListener("click", redirectToDisplay);
-
-const submitButton = document.getElementById("submit-button");
-submitButton.addEventListener("click", printRecipeData);
 
 //const modifyButton = document.getElementById("modify");
 //modifyButton.addEventListener("click", modifyRecipeData(nameData, ingredientData, instructionData));
