@@ -221,10 +221,11 @@
     </div>
 
     <script>
-      /*document.addEventListener('DOMContentLoaded', function() {
-        const name = 
-        readRecipeData(name);
-      });*/
+      document.addEventListener('DOMContentLoaded', function() {
+        const name = sessionStorage.getItem("selectedRecipe"); 
+        const recipeData = readRecipeData(name);
+        console.log(recipeData);
+      });
   </script>
 
   </body>
