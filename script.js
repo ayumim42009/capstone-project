@@ -79,7 +79,7 @@ function redirectToDisplay() {
     const recipeName = document.getElementsByClassName("recipe-card-title")[0].textContent;
     console.log(recipeName);
     window.location.href = 'displayRecipe.html';
-    readRecipeData(recipeName);
+    await readRecipeData(recipeName);
 }
 
 // This function sends the recipe data to the database
@@ -166,7 +166,7 @@ async function modifyRecipeData(name, ingredients, instructions) {
 async function readRecipeData(name) {
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/readRecipe",
         {
-            method: "GET",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
