@@ -74,10 +74,12 @@ function downloadJSON(data) {
 }
 
 
-//other functions to send data to database and redirect to download page
-function redirectToDownload() {
-    //await recipeData(URL,'', [], {}); 
-    window.location.href = 'downloadRecipe.html';
+//other functions to send data to database and redirect to display page
+function redirectToDisplay() {
+    const recipeName = document.getElementsByClassName("recipe-card-title")[0].textContent;
+    console.log(recipeName);
+    window.location.href = 'displayRecipe.html';
+    readRecipeData(recipeName);
 }
 
 // This function sends the recipe data to the database
@@ -134,7 +136,7 @@ async function removeRecipeData(name) {
     return result;
 }
 
-// This function removes a recipe's entry in the databse based on the recipe title
+// This function updates the recipe data from the database based on the recipe title
 async function modifyRecipeData(name, ingredients, instructions) {
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/updateRecipe",
         {
@@ -160,7 +162,7 @@ async function modifyRecipeData(name, ingredients, instructions) {
     return result;
 }
 ``
-// This function updates the recipe data from the database based on the recipe title
+// This function retrieves the recipe data from the database based on the rexipe 
 async function readRecipeData(name) {
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/readRecipe",
         {
@@ -299,6 +301,25 @@ function removeInstruction() {
 addInstructionButton.addEventListener("click", addInstruction);
 removeInstructionButton.addEventListener("click", removeInstruction);
 
+function addRecipe() {
+      const btn = document.querySelector('.action-btn');
+      const toast = document.getElementById('toast');
+
+      // avoid double clicks
+      btn.disabled = true;
+      btn.textContent = 'Saved!';
+      btn.style.backgroundColor = '#5a8a00';
+
+      // display toast message
+      toast.classList.add('show');
+
+      // hide toast after 3s
+      setTimeout(() => { toast.classList.remove('show'); }, 3000);
+      
+      // redirect to home after 2s
+      setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+    }
+
 
 //for testing
 function printRecipeData() {
@@ -316,18 +337,15 @@ function printRecipeData() {
 
     //send the data to the database
     sendRecipeData("", nameData, ingredientData, instructionData);
+    addRecipe();
 }
 
 
+const redirect = document.getElementsByClassName("recipe-card-title");
+redirect.addEventListener("click", redirectToDisplay);
 
 const submitButton = document.getElementById("submit-button");
 submitButton.addEventListener("click", printRecipeData);
-/*submitButton.addEventListener("click", () => {
-    
-    sendRecipeData("", nameData, ingredientData, instructionData);
-});*/
-//for next week
-//.addEventListener("click", readRecipeData(nameData))
 
 const modifyButton = document.getElementById("modify");
 modifyButton.addEventListener("click", modifyRecipeData(nameData, ingredientData, instructionData));

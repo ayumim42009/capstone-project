@@ -212,9 +212,6 @@
       </div>
 
       <div class="add-btn-wrap">
-        <button class="action-btn" onclick="addRecipe()">Add Recipe</button>
-      </div>
-      <div class="add-btn-wrap">
         <button class="action-btn" id="modify" >Modify Recipe</button>
       </div>
       <div class="add-btn-wrap">
@@ -224,24 +221,10 @@
     </div>
 
     <script>
-    function addRecipe() {
-      const btn = document.querySelector('.action-btn');
-      const toast = document.getElementById('toast');
-
-      // avoid double clicks
-      btn.disabled = true;
-      btn.textContent = 'Saved!';
-      btn.style.backgroundColor = '#5a8a00';
-
-      // display toast message
-      toast.classList.add('show');
-
-      // hide toast after 3s
-      setTimeout(() => { toast.classList.remove('show'); }, 3000);
-      
-      // redirect to home after 2s
-      setTimeout(() => { window.location.href = 'index.html'; }, 2000);
-    }
+      document.addEventListener('DOMContentLoaded', function() {
+        const name = 
+        readRecipeData(name);
+      });
   </script>
 
   </body>
