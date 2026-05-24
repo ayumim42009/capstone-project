@@ -75,7 +75,7 @@ function downloadJSON(data) {
 
 
 //other functions to send data to database and redirect to display page
-function redirectToDisplay() {
+async function redirectToDisplay() {
     const recipeName = document.getElementsByClassName("recipe-card-title")[0].textContent;
     console.log(recipeName);
     window.location.href = 'displayRecipe.html';
