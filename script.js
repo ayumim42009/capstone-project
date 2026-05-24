@@ -218,88 +218,91 @@ async function testConnection() {
  * 
  */
 
-//ingredients
-const addIngredientButton =
-    document.getElementById("ingredient-add-button");
-const removeIngredientButton =
-    document.getElementById("ingredient-remove-button");
-const ingredientForm = document.getElementById("ingredient-form");
+if(window.location.pathname.endsWith("recipeForm.html")) {
 
-let ingredientCount = 1;
+    //ingredients
+    const addIngredientButton =
+        document.getElementById("ingredient-add-button");
+    const removeIngredientButton =
+        document.getElementById("ingredient-remove-button");
+    const ingredientForm = document.getElementById("ingredient-form");
 
-function addIngredient() {
-    ingredientCount++;
+    let ingredientCount = 1;
 
-    const label = document.createElement("label");
-    label.setAttribute("for", `ingredient${ingredientCount}`);
-    label.textContent = `Ingredient ${ingredientCount}:`;
+    function addIngredient() {
+        ingredientCount++;
 
-    const input = document.createElement("input");
-    input.type = "text";
-    input.id = `ingredient${ingredientCount}`;
-    input.name = `ingredient${ingredientCount}`;
+        const label = document.createElement("label");
+        label.setAttribute("for", `ingredient${ingredientCount}`);
+        label.textContent = `Ingredient ${ingredientCount}:`;
 
-    const br = document.createElement("br");
+        const input = document.createElement("input");
+        input.type = "text";
+        input.id = `ingredient${ingredientCount}`;
+        input.name = `ingredient${ingredientCount}`;
 
-    ingredientForm.appendChild(label);
-    ingredientForm.appendChild(input);
-    ingredientForm.appendChild(br);
-}
+        const br = document.createElement("br");
 
-function removeIngredient() {
-    if (ingredientCount > 1) {
-        ingredientForm.removeChild(ingredientForm.lastChild);
-        ingredientForm.removeChild(ingredientForm.lastChild);
-        ingredientForm.removeChild(ingredientForm.lastChild);
-
-        ingredientCount--;
+        ingredientForm.appendChild(label);
+        ingredientForm.appendChild(input);
+        ingredientForm.appendChild(br);
     }
-}
 
-addIngredientButton.addEventListener("click", addIngredient);
-removeIngredientButton.addEventListener("click", removeIngredient);
+    function removeIngredient() {
+        if (ingredientCount > 1) {
+            ingredientForm.removeChild(ingredientForm.lastChild);
+            ingredientForm.removeChild(ingredientForm.lastChild);
+            ingredientForm.removeChild(ingredientForm.lastChild);
 
-
-//instructions
-const addInstructionButton =
-    document.getElementById("instruction-add-button");
-const removeInstructionButton =
-    document.getElementById("instruction-remove-button");
-const instructionForm = document.getElementById("instructions-form");
-
-let instructionCount = 1;
-
-function addInstruction() {
-    instructionCount++;
-
-    const label = document.createElement("label");
-    label.setAttribute("for", `instructions${instructionCount}`);
-    label.textContent = `Step ${instructionCount}:`;
-
-    const input = document.createElement("input");
-    input.type = "text";
-    input.id = `instructions${instructionCount}`;
-    input.name = `instructions${instructionCount}`;
-
-    const br = document.createElement("br");
-
-    instructionForm.appendChild(label);
-    instructionForm.appendChild(input);
-    instructionForm.appendChild(br);
-}
-
-function removeInstruction() {
-    if (instructionCount > 1) {
-        instructionForm.removeChild(instructionForm.lastChild);
-        instructionForm.removeChild(instructionForm.lastChild);
-        instructionForm.removeChild(instructionForm.lastChild);
-
-        instructionCount--;
+            ingredientCount--;
+        }
     }
-}
 
-addInstructionButton.addEventListener("click", addInstruction);
-removeInstructionButton.addEventListener("click", removeInstruction);
+    addIngredientButton.addEventListener("click", addIngredient);
+    removeIngredientButton.addEventListener("click", removeIngredient);
+
+
+    //instructions
+    const addInstructionButton =
+        document.getElementById("instruction-add-button");
+    const removeInstructionButton =
+        document.getElementById("instruction-remove-button");
+    const instructionForm = document.getElementById("instructions-form");
+
+    let instructionCount = 1;
+
+    function addInstruction() {
+        instructionCount++;
+
+        const label = document.createElement("label");
+        label.setAttribute("for", `instructions${instructionCount}`);
+        label.textContent = `Step ${instructionCount}:`;
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.id = `instructions${instructionCount}`;
+        input.name = `instructions${instructionCount}`;
+
+        const br = document.createElement("br");
+
+        instructionForm.appendChild(label);
+        instructionForm.appendChild(input);
+        instructionForm.appendChild(br);
+    }
+
+    function removeInstruction() {
+        if (instructionCount > 1) {
+            instructionForm.removeChild(instructionForm.lastChild);
+            instructionForm.removeChild(instructionForm.lastChild);
+            instructionForm.removeChild(instructionForm.lastChild);
+
+            instructionCount--;
+        }
+    }
+
+    addInstructionButton.addEventListener("click", addInstruction);
+    removeInstructionButton.addEventListener("click", removeInstruction);
+}
 
 function addRecipe() {
       const btn = document.querySelector('.action-btn');
@@ -347,8 +350,8 @@ redirect.addEventListener("click", redirectToDisplay);
 const submitButton = document.getElementById("submit-button");
 submitButton.addEventListener("click", printRecipeData);
 
-const modifyButton = document.getElementById("modify");
-modifyButton.addEventListener("click", modifyRecipeData(nameData, ingredientData, instructionData));
+//const modifyButton = document.getElementById("modify");
+//modifyButton.addEventListener("click", modifyRecipeData(nameData, ingredientData, instructionData));
 
-const deleteButton = document.getElementById("delete");
-deleteButton.addEventListener("click", deleteRecipeData(nameData));
+//const deleteButton = document.getElementById("delete");
+//deleteButton.addEventListener("click", deleteRecipeData(nameData));
