@@ -142,7 +142,7 @@ async function removeRecipeData() {
 async function modifyRecipeData(name, ingredients, instructions) {
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/updateRecipe",
         {
-            method: "PUSH",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
