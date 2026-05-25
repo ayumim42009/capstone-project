@@ -190,7 +190,7 @@
         document.getElementsByClassName("steps-list")[0].innerHTML = recipeData[0]['instructions'].map((step, index) => `<li><span class="step-num">${index + 1}.</span> ${step}</li>`).join('');
 
         const modifyButton = document.getElementById("modify");
-        modifyButton.addEventListener("click", modifyRecipeData(recipeData[0].name, recipeData[0].ingredients, recipeData[0].instructions));
+        modifyButton.addEventListener("click", modifyRecipeData);
 
         const deleteButton = document.getElementById("delete");
         deleteButton.addEventListener("click", removeRecipeData);

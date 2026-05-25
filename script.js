@@ -139,7 +139,13 @@ async function removeRecipeData() {
 }
 
 // This function updates the recipe data from the database based on the recipe title
-async function modifyRecipeData(name, ingredients, instructions) {
+async function modifyRecipeData() {
+    const name = document.getElementsByClassName("recipe-title")[0].textContent;
+    console.log(name);
+    const ingredients = document.getElementsByClassName("ingredients-list")[0].textContent.trim().split("\n");
+    console.log(ingredients);
+    const instructions = document.getElementsByClassName("instructions-list")[0].textContent.trim().split("\n");
+    console.log(instructions);
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/updateRecipe",
         {
             method: "POST",
