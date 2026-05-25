@@ -226,9 +226,9 @@
         const recipeData = readRecipeData(name);
         console.log(recipeData);
         
-        document.getElementsByClassName("recipe-title")[0].textContent = recipeData.name;
-        document.getElementsByClassName("ingredients-list").innerHTML = recipeData.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('');
-        document.getElementsByClassName("steps-list").innerHTML = recipeData.instructions.map((step, index) => `<li><span class="step-num">${index + 1}.</span> ${step}</li>`).join('');
+        document.getElementsByClassName("recipe-title")[0].textContent = recipeData[0].name;
+        document.getElementsByClassName("ingredients-list")[0].innerHTML = recipeData.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('');
+        document.getElementsByClassName("steps-list")[0].innerHTML = recipeData.instructions.map((step, index) => `<li><span class="step-num">${index + 1}.</span> ${step}</li>`).join('');
       });
   </script>
 
