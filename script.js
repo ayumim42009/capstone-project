@@ -351,24 +351,3 @@ function printRecipeData() {
 
 const redirect = document.querySelector('.recipe-card');
 redirect.addEventListener("click", redirectToDisplay);
-
-
-if(window.location.pathname.endsWith("displayRecipe.html")) {
-
-/*document.addEventListener('DOMContentLoaded', async function() {
-        const name = sessionStorage.getItem("selectedRecipe"); 
-        const recipeData = await readRecipeData(name);
-        console.log(recipeData[0]['ingredients']);
-        console.log(recipeData[0]['instructions']);
-
-        document.getElementsByClassName("recipe-title")[0].textContent = recipeData[0].name;
-        document.getElementsByClassName("ingredients-list")[0].innerHTML = recipeData[0]['ingredients'].map(ingredient => `<li>${ingredient}</li>`).join('');
-        document.getElementsByClassName("steps-list")[0].innerHTML = recipeData[0]['instructions'].map((step, index) => `<li><span class="step-num">${index + 1}.</span> ${step}</li>`).join('');
-      
-});*/
-        const modifyButton = document.getElementById("modify");
-        modifyButton.addEventListener("click", modifyRecipeData(nameData, ingredientData, instructionData));
-
-        const deleteButton = document.getElementById("delete");
-        deleteButton.addEventListener("click", removeRecipeData);
-}
