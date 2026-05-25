@@ -227,8 +227,8 @@
         console.log(recipeData[0].ingredients.map(ingredient => console.log(ingredient)));
         console.log(recipeData[0].instructions.map(instruction => console.log(instruction)));
         document.getElementsByClassName("recipe-title")[0].textContent = recipeData[0].name;
-        //document.getElementsByClassName("ingredients-list")[0].innerHTML = recipeData.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('');
-        //document.getElementsByClassName("steps-list")[0].innerHTML = recipeData.instructions.map((step, index) => `<li><span class="step-num">${index + 1}.</span> ${step}</li>`).join('');
+        document.getElementsByClassName("ingredients-list")[0].innerHTML = recipeData.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('');
+        document.getElementsByClassName("steps-list")[0].innerHTML = recipeData.instructions.map((step, index) => `<li><span class="step-num">${index + 1}.</span> ${step}</li>`).join('');
       });
   </script>
 
