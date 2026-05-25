@@ -116,7 +116,7 @@ async function sendRecipeData(URL, name, ingredients, instructions) {
 async function removeRecipeData() {
     const name = document.getElementsByClassName("recipe-title")[0].textContent;
     console.log(name);
-    const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/removeRecipe",
+    const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/deleteRecipe",
         {
             method: "DELETE",
             headers: {
