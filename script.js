@@ -113,7 +113,8 @@ async function sendRecipeData(URL, name, ingredients, instructions) {
 //submitButton.addEventListener("click", sendRecipeData(testRecipe.url, testRecipe.name, testRecipe.ingredients, testRecipe.instructions));
 
 // This function removes a recipe's entry in the databse based on the recipe title
-async function removeRecipeData(name) {
+async function removeRecipeData() {
+    const name = document.getElementsByClassName("recipe-title")[0].textContent;
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/removeRecipe",
         {
             method: "DELETE",
@@ -347,11 +348,11 @@ function printRecipeData() {
     addRecipe();
 }
 
-const redirect = document.querySelector('.recipe-card-title');
+const redirect = document.querySelector('.recipe-card');
 redirect.addEventListener("click", redirectToDisplay);
 
-//const modifyButton = document.getElementById("modify");
-//modifyButton.addEventListener("click", modifyRecipeData(nameData, ingredientData, instructionData));
+const modifyButton = document.getElementById("modify");
+modifyButton.addEventListener("click", modifyRecipeData(nameData, ingredientData, instructionData));
 
-//const deleteButton = document.getElementById("delete");
-//deleteButton.addEventListener("click", deleteRecipeData(nameData));
+const deleteButton = document.getElementById("delete");
+deleteButton.addEventListener("click", removeRecipeData);
