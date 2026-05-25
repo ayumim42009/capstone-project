@@ -10,7 +10,7 @@ import {
 } from "@aws-sdk/client-secrets-manager";
 import * as mysql from "mysql2/promise";
 
-
+let connection;
 
 
 const app = express();
@@ -27,34 +27,34 @@ const numberWords = [
     "Seventeen", "Eighteen", "Nineteen",
     "Twenty"
 ];
-  
-  function getSecret(){
-      const secret_name = "prod/MySQLCred";
-  
-      const client = new SecretsManagerClient({
-      region: "us-east-2",
-      });
-  
-      let response;
-  
-      try {
-      response = await client.send(
-          new GetSecretValueCommand({
-          SecretId: secret_name,
-          VersionStage: "AWSCURRENT", // VersionStage defaults to AWSCURRENT if unspecified
-          })
-      );
-      } catch (error) {
-      // For a list of exceptions thrown, see
-      // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
-      throw error;
-      }
-      return response.SecretString;
-      //const secret = response.SecretString;
-  
-      // Your code goes here
-      //console.log(secret);
-  }
+
+/*async function getSecret(){
+    const secret_name = "prod/MySQLCred";
+ 
+    const client = new SecretsManagerClient({
+    region: "us-east-2",
+    });
+ 
+    let response;
+ 
+    try {
+    response = await client.send(
+        new GetSecretValueCommand({
+        SecretId: secret_name,
+        VersionStage: "AWSCURRENT", // VersionStage defaults to AWSCURRENT if unspecified
+        })
+    );
+    } catch (error) {
+    // For a list of exceptions thrown, see
+    // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+    throw error;
+    }
+    return response.SecretString;
+    //const secret = response.SecretString;
+ 
+    // Your code goes here
+    //console.log(secret);
+}*/
 
 
 app.use((req, res, next) => {
@@ -85,53 +85,142 @@ const data = {
   console.log(result);
 };*/
 
-app.get("/readRecipe", (req, res) => {
-    const secret = getSecret();
-    const credentials = JSON.parse(secret);
-  
-      try{
-          // 1. Establish connection
-          const connection = await mysql.createConnection({
-              host: credentials.host,
-              user: credentials.username,
-              password: credentials.password,
-              database: credentials.dbname
-          });
-          // 2. Perform database operations (e.g., query, insert)
-          const [rows, fields] = await connection.execute('SELECT name FROM recipes WHERE name = ?',
-            [req.name]);
-      } catch (error) {
-          console.error("Error connecting to database:", error);
-      } finally {
-      // 3. Always close the connection to avoid exhausting RDS limits
-      if (connection) await connection.end();
+app.get("/testConnection", async (req, res) => {
+    console.log("HOST:", process.env.DB_HOST);
+    //const secret = await getSecret();
+    //const credentials = JSON.parse(secret);
+    let connection;
+    try {
+        // 1. Establish connection
+        connection = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            //database: process.env.DB_NAME
+        });
+        // 2. Perform database operations (e.g., query, insert)
+        const [u] = await connection.query("SELECT USER(), CURRENT_USER()");
+        console.log(u);
+        const [rows] = await connection.query("SHOW DATABASES");
+        console.log(rows);
+    } catch (error) {
+        console.error("Error connecting to database:", error);
+    } finally {
+        // 3. Always close the connection to avoid exhausting RDS limits
+        if (connection) await connection.end();
     }
     res.json({ message: "OK" });
-  });
+});
 
-  app.post("/addRecipe", async (req, res) => {
-    const secret = await getSecret();
-    const credentials = JSON.parse(secret);
-  
-      try{
-          // 1. Establish connection
-          const connection = await mysql.createConnection({
-              host: credentials.host,
-              user: credentials.username,
-              password: credentials.password,
-              database: credentials.dbname
-          });
-          // 2. Perform database operations (e.g., query, insert)
-          const [rows, fields] = await connection.execute(`INSERT INTO recipes (url, name, ingredients, instructions)
-            VALUES(req.body.url, req.body.name, JSON.stringify(req.body.ingredients), JSON.stringify(req.body.instructions)`);
-      } catch (error) {
-          console.error("Error connecting to database:", error);
-      } finally {
-      // 3. Always close the connection to avoid exhausting RDS limits
-      if (connection) await connection.end();
+app.post("/readRecipe", async (req, res) => {
+
+    let connection;
+    try {
+        // 1. Establish connection
+        connection = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME
+        });
+        // 2. Perform database operations (e.g., query, insert)
+        console.log(req.body.name);
+        const [rows, fields] = await connection.execute('SELECT * FROM recipes WHERE name LIKE ?',
+            [req.body.name]);
+        res.json(rows);
+    } catch (error) {
+        console.error("Error connecting to database:", error);
+    } finally {
+        // 3. Always close the connection to avoid exhausting RDS limits
+        if (connection) await connection.end();
+    }
+    return res;
+});
+
+app.post("/addRecipe", async (req, res) => {
+    let connection;
+    try {
+        // 1. Establish connection
+        connection = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME
+        });
+        console.log("ROUTE HIT");
+        console.log("BODY:", req.body);
+        console.log("CONNECTED");
+        // 2. Perform database operations (e.g., query, insert)
+        const [rows, fields] = await connection.execute(`INSERT INTO recipes (url, name, ingredients, instructions)
+            VALUES (?, ?, ?, ?)`,
+            [
+                req.body.url,
+                req.body.name,
+                JSON.stringify(req.body.ingredients),
+                JSON.stringify(req.body.instructions)
+            ]);
+        console.log("RESULT:", rows);
+    } catch (error) {
+        console.error("Error connecting to database:", error);
+        return res.status(500).json({
+            message: "Insert failed",
+            error: error.message
+        });
+    } finally {
+        // 3. Always close the connection to avoid exhausting RDS limits
+        if (connection) await connection.end();
     }
     res.json({ message: "OK" });
-  });
+});
+
+
+app.post("/modifyRecipe", async (req, res) => {
+ let connection;
+ try {
+    // 1. Establish connection
+    connection = await mysql.createConnection({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME
+    });
+    // 2. Perform database operations (e.g., query, insert)
+        const [rows, fields] = await connection.execute(`UPDATE recipes
+        SET ingredients = ?, instructions = ?
+        WHERE name = ?`,
+        [req.body.ingredients], [req.body.instructions], [req.body.name]);
+    } catch (error) {
+        console.error("Error connecting to database:", error);
+    } finally {
+    // 3. Always close the connection to avoid exhausting RDS limits
+     if (connection) await connection.end();
+    }
+    res.json({ message: "OK" });
+});
+
+
+app.delete("/deleteRecipe", async (req, res) => {
+     let connection;
+     try {
+         // 1. Establish connection
+         connection = await mysql.createConnection({
+             host: process.env.DB_HOST,
+             user: process.env.DB_USER,
+             password: process.env.DB_PASSWORD,
+             database: process.env.DB_NAME
+         });
+         console.log(req.body.name);
+         // 2. Perform database operations (e.g., query, insert)
+         const [rows, fields] = await connection.execute('DELETE FROM recipes WHERE name = ?',
+             [req.body.name]);
+     } catch (error) {
+         console.error("Error connecting to database:", error);
+     } finally {
+         // 3. Always close the connection to avoid exhausting RDS limits
+         if (connection) await connection.end();
+             }
+     res.json({ message: "Recipe Deleted" });
+ });
 
 app.post("/scrape", async (req, res) => {
 
