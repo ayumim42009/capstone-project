@@ -140,6 +140,8 @@ async function removeRecipeData() {
 
 // This function updates the recipe data from the database based on the recipe title
 async function modifyRecipeData() {
+    const name = sessionStorage.getItem("selectedRecipe"); 
+    const recipeData = await readRecipeData(name);
     const name = document.getElementsByClassName("recipe-title")[0].textContent;
     console.log(name);
     const ingredients = document.getElementsByClassName("ingredients-list")[0].textContent.trim().split("\n");
@@ -153,6 +155,7 @@ async function modifyRecipeData() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
+                id : recipeData[0].id,
                 name: name,
                 ingredients: ingredients,
                 instructions: instructions
