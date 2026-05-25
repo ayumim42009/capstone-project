@@ -149,7 +149,7 @@
 
       <div class="recipe-top">
         <div>
-          <h1 class="recipe-title">Lemon Ricotta Cookies with Lemon Glaze</h1>
+          <h1 class="recipe-title"></h1>
 
           <div class="ingredients-section">
             <div class="section-heading">Ingredients:</div>
@@ -165,17 +165,17 @@
       <div class="steps-section">
         <div class="section-heading">Steps:</div>
         <ol class="steps-list">
-          
+
         </ol>
       </div>
 
       <div class="add-btn-wrap">
-        <button class="action-btn" id="modify" >Modify Recipe</button>
+        <button class="action-btn" id="modify">Modify Recipe</button>
       </div>
       <div class="add-btn-wrap">
         <button class="action-btn" id="delete">Delete Recipe</button>
       </div>
-      
+
     </div>
 
     <script>
@@ -188,6 +188,12 @@
         document.getElementsByClassName("recipe-title")[0].textContent = recipeData[0].name;
         document.getElementsByClassName("ingredients-list")[0].innerHTML = recipeData[0]['ingredients'].map(ingredient => `<li>${ingredient}</li>`).join('');
         document.getElementsByClassName("steps-list")[0].innerHTML = recipeData[0]['instructions'].map((step, index) => `<li><span class="step-num">${index + 1}.</span> ${step}</li>`).join('');
+
+        const modifyButton = document.getElementById("modify");
+        modifyButton.addEventListener("click", modifyRecipeData(recipeData[0].name, recipeData[0].ingredients, recipeData[0].instructions));
+
+        const deleteButton = document.getElementById("delete");
+        deleteButton.addEventListener("click", removeRecipeData);
       
         
       });
