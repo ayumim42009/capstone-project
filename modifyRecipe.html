@@ -119,7 +119,6 @@
       <form name="ingredient-form" id="ingredient-form">
         <label for="ingredient1">Ingredient 1:</label>
         <input type="text" id="ingredient1" name="ingredient1">
-        <br>
       </form>
       <div class="heading-row"><h2>Instructions</h2> <button type="button"
           id="instruction-add-button">+</button>
@@ -127,10 +126,31 @@
         
       <form id="instructions-form" name="instructions-form">
         <label for="instructions">Step 1:</label><br>
-        <input type="text" id="instructions" name="instructions"><br>
+        <input type="text" id="instructions" name="instructions">
       </form>
       <button class="action-btn" id="submit-button">
         Save Changes
       </button>
     </body>
+    <script>
+      let params = new URLSearchParams(window.location.search);
+
+      let recipeId = params.get("id");
+
+      // Fetch the recipe data from the database and populate the form fields
+      fetch(`https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/getRecipe?id=${recipeId}`)
+       .then(response => response.json())
+       .then(recipeData => {
+         document.getElementsByClassName("recipe-form")[0].textContent = recipeData[0].name;
+        document.getElementsByClassName("ingredient-form")[0].innerHTML = recipeData[0]['ingredients'].map((ingredient,  index) => 
+        `<label for="ingredient${index + 1}">Ingredient ${index + 1}:</label>`
+        `<input type="text" id="ingredient${index + 1}" name="ingredient${index + 1}" value="${ingredient}">`).join('');
+        document.getElementsByClassName("instructions-form")[0].innerHTML = recipeData[0]['instructions'].map((step, index) => 
+        `<label for="instructions${index + 1}">Step ${index + 1}:</label><br>`
+        `<input type="text" id="instructions${index + 1}" name="instructions${index + 1}" value="${step}">`).join('');
+       });
+
+       const modifyButton = document.getElementById("submit-button");
+        modifyButton.addEventListener("click", modifyRecipeData);
+    </script>  
   </html>

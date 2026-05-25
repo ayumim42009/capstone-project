@@ -189,11 +189,14 @@
         document.getElementsByClassName("ingredients-list")[0].innerHTML = recipeData[0]['ingredients'].map(ingredient => `<li>${ingredient}</li>`).join('');
         document.getElementsByClassName("steps-list")[0].innerHTML = recipeData[0]['instructions'].map((step, index) => `<li><span class="step-num">${index + 1}.</span> ${step}</li>`).join('');
 
-        const modifyButton = document.getElementById("modify");
-        modifyButton.addEventListener("click", modifyRecipeData);
-
         const deleteButton = document.getElementById("delete");
         deleteButton.addEventListener("click", removeRecipeData);
+
+        const modifyButton = document.getElementById("modify");
+        modifyButton.addEventListener("click", () => {
+          //need to get the recipe id to pass to the modify page
+        window.location.href = `modifyRecipe.html?id=${recipeData.id}`;
+});
       
         
       });
