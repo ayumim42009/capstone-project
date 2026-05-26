@@ -82,8 +82,8 @@ async function redirectToDisplay() {
     window.location.href = 'displayRecipe.html';
 }
 
-async function getRecipeIdByName(name){
-     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/getRecipeID",
+async function getRecipeIdByName(name) {
+    const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/getRecipeID",
         {
             method: "POST",
             headers: {
@@ -163,15 +163,9 @@ async function removeRecipeData() {
 
 // This function updates the recipe data from the database based on the recipe title
 async function modifyRecipeData() {
-    //const name = sessionStorage.getItem("selectedRecipe"); 
+
     const recipeData = await readRecipeData(sessionStorage.getItem("selectedRecipe"));
-    //const name = document.getElementsByClassName("recipe-title")[0].textContent;
-    //console.log(name);
-    //const ingredients = document.getElementsByClassName("ingredients-list")[0].textContent.trim().split("\n");
-    //console.log(ingredients);
-    //const instructions = document.getElementsByClassName("instructions-list")[0].textContent.trim().split("\n");
-    //console.log(instructions);
-    
+
     const nameData = document.getElementById("recipe-name").value;
     console.log(nameData);
 
@@ -181,7 +175,23 @@ async function modifyRecipeData() {
 
     const instructionsFormData = new FormData(document.querySelector("form[name='instructions-form']"));
     const instructionData = Array.from(instructionsFormData.values());
-    console.log(instructionData);
+    // testing
+    console.log(recipeData);
+    console.log(recipeData[0]);
+    console.log(recipeData[0]?.id);
+    console.log("---------------------------------");
+    const payload = {
+        id: recipeData[0].id,
+        name: nameData,
+        ingredients: ingredientData,
+        instructions: instructionData
+    };
+
+    console.log(JSON.stringify(payload, null, 2));
+
+    console.log(document.querySelector("form[name='ingredient-form']"));
+    console.log(document.querySelector("form[name='instructions-form']"));
+    //end testing?
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/updateRecipe",
         {
             method: "POST",
@@ -264,7 +274,7 @@ async function testConnection() {
  */
 
 
-if(window.location.pathname.endsWith("recipeForm.html")) {
+if (window.location.pathname.endsWith("recipeForm.html")) {
 
     //ingredients
     const addIngredientButton =
@@ -354,23 +364,23 @@ if(window.location.pathname.endsWith("recipeForm.html")) {
 }
 
 function addRecipe() {
-      const btn = document.querySelector('.action-btn');
-      const toast = document.getElementById('toast');
+    const btn = document.querySelector('.action-btn');
+    const toast = document.getElementById('toast');
 
-      // avoid double clicks
-      btn.disabled = true;
-      btn.textContent = 'Saved!';
-      btn.style.backgroundColor = '#5a8a00';
+    // avoid double clicks
+    btn.disabled = true;
+    btn.textContent = 'Saved!';
+    btn.style.backgroundColor = '#5a8a00';
 
-      // display toast message
-      toast.classList.add('show');
+    // display toast message
+    toast.classList.add('show');
 
-      // hide toast after 3s
-      setTimeout(() => { toast.classList.remove('show'); }, 3000);
-      
-      // redirect to home after 2s
-      setTimeout(() => { window.location.href = 'index.html'; }, 2000);
-    }
+    // hide toast after 3s
+    setTimeout(() => { toast.classList.remove('show'); }, 3000);
+
+    // redirect to home after 2s
+    setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+}
 
 
 //for testing
