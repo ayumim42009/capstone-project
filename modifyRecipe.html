@@ -128,7 +128,7 @@
         <label for="instructions">Step 1:</label><br>
         <input type="text" id="instructions" name="instructions">
       </form>
-      <button class="action-btn" id="submit-button">
+      <button class="action-btn" id="modify-button">
         Save Changes
       </button>
     </body>
@@ -153,7 +153,7 @@
           <input type="text" id="instructions${index + 1}" name="instructions${index + 1}" value="${step}">`).join('');
         //});
 
-        const modifyButton = document.getElementById("submit-button");
+        const modifyButton = document.getElementById("modify-button");
           modifyButton.addEventListener("click", modifyRecipeData);
       });
     </script>  
