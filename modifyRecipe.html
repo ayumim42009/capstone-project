@@ -145,10 +145,10 @@
         //.then(recipeData => {
           //document.getElementsByClassName("recipe-form")[0].textContent = recipeData[0].name;
           document.getElementById("recipe-name").value = recipeData[0].name;
-          document.getElementsByClassName("ingredient-form").innerHTML = recipeData[0]['ingredients'].map((ingredient,  index) => 
+          document.getElementById("ingredient-form").innerHTML = recipeData[0]['ingredients'].map((ingredient,  index) => 
           `<label for="ingredient${index + 1}">Ingredient ${index + 1}:</label>
           <input type="text" id="ingredient${index + 1}" name="ingredient${index + 1}" value="${ingredient}">`).join('');
-          document.getElementsByClassName("instructions-form").innerHTML = recipeData[0]['instructions'].map((step, index) => 
+          document.getElementById("instructions-form").innerHTML = recipeData[0]['instructions'].map((step, index) => 
           `<label for="instructions${index + 1}">Step ${index + 1}:</label>
           <input type="text" id="instructions${index + 1}" name="instructions${index + 1}" value="${step}">`).join('');
         //});
