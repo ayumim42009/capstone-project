@@ -166,7 +166,7 @@ async function modifyRecipeData() {
 
     
     const recipeId = getRecipeIdByName((sessionStorage.getItem("selectedRecipe")));
-    const recipeData = await readRecipeData(recipeId);
+    const recipeData = await readRecipeData(recipeId[0]['id']);
     const nameData = document.getElementById("recipe-name").value;
     console.log(nameData);
 
