@@ -82,6 +82,29 @@ async function redirectToDisplay() {
     window.location.href = 'displayRecipe.html';
 }
 
+async function getRecipeIdByName(name){
+     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/getRecipeID",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name
+            })
+        });
+
+    if (!response.ok) {
+        const text = await response.text();
+        console.error("Lambda response:", text);
+        throw new Error(`HTTP error ${response.status}: ${text}`);
+    }
+
+    const result = await response.json();
+    console.log("Success:", result);
+    return result;
+}
+
 // This function sends the recipe data to the database
 async function sendRecipeData(URL, name, ingredients, instructions) {
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/addRecipe",

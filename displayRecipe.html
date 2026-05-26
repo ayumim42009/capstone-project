@@ -181,7 +181,9 @@
     <script>
       document.addEventListener('DOMContentLoaded', async function() {
         const name = sessionStorage.getItem("selectedRecipe"); 
-        const recipeData = await readRecipeData(name);
+        const id = await getRecipeIdByName(name);
+        console.log(id);
+        const recipeData = await readRecipeData(id);
         console.log(recipeData[0]['ingredients']);
         console.log(recipeData[0]['instructions']);
 
