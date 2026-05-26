@@ -197,7 +197,7 @@ async function modifyRecipeData() {
 }
 ``
 // This function retrieves the recipe data from the database based on the rexipe 
-async function readRecipeData(name) {
+async function readRecipeData(id) {
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/readRecipe",
         {
             method: "POST",
@@ -205,7 +205,7 @@ async function readRecipeData(name) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                name: name
+                id: id
             })
         });
 
