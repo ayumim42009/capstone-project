@@ -164,8 +164,9 @@ async function removeRecipeData() {
 // This function updates the recipe data from the database based on the recipe title
 async function modifyRecipeData() {
 
-    const recipeData = await readRecipeData(sessionStorage.getItem("selectedRecipe"));
-
+    
+    const recipeId = getRecipeIdByName((sessionStorage.getItem("selectedRecipe")));
+    const recipeData = await readRecipeData(recipeId);
     const nameData = document.getElementById("recipe-name").value;
     console.log(nameData);
 
