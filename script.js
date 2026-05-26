@@ -275,7 +275,7 @@ async function testConnection() {
  */
 
 
-if (window.location.pathname.endsWith("recipeForm.html")) {
+if (window.location.pathname.endsWith("recipeForm.html") || window.location.pathname.endsWith("modifyRecipe.html")) {
 
     //ingredients
     const addIngredientButton =
