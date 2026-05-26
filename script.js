@@ -165,12 +165,23 @@ async function removeRecipeData() {
 async function modifyRecipeData() {
     //const name = sessionStorage.getItem("selectedRecipe"); 
     const recipeData = await readRecipeData(sessionStorage.getItem("selectedRecipe"));
-    const name = document.getElementsByClassName("recipe-title")[0].textContent;
-    console.log(name);
-    const ingredients = document.getElementsByClassName("ingredients-list")[0].textContent.trim().split("\n");
-    console.log(ingredients);
-    const instructions = document.getElementsByClassName("instructions-list")[0].textContent.trim().split("\n");
-    console.log(instructions);
+    //const name = document.getElementsByClassName("recipe-title")[0].textContent;
+    //console.log(name);
+    //const ingredients = document.getElementsByClassName("ingredients-list")[0].textContent.trim().split("\n");
+    //console.log(ingredients);
+    //const instructions = document.getElementsByClassName("instructions-list")[0].textContent.trim().split("\n");
+    //console.log(instructions);
+    
+    const nameData = document.getElementById("recipe-name").value;
+    console.log(nameData);
+
+    const ingredientFormData = new FormData(document.querySelector("form[name='ingredient-form']"));
+    const ingredientData = Array.from(ingredientFormData.values());
+    console.log(ingredientData);
+
+    const instructionsFormData = new FormData(document.querySelector("form[name='instructions-form']"));
+    const instructionData = Array.from(instructionsFormData.values());
+    console.log(instructionData);
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/updateRecipe",
         {
             method: "POST",
