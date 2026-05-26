@@ -190,9 +190,9 @@ async function modifyRecipeData() {
             },
             body: JSON.stringify({
                 id : recipeData[0].id,
-                name: name,
-                ingredients: ingredients,
-                instructions: instructions
+                name: nameData,
+                ingredients: ingredientData,
+                instructions: instructionData
             })
         });
 
