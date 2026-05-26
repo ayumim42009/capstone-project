@@ -138,7 +138,7 @@
       let recipeId = params.get("id");
 
       // Fetch the recipe data from the database and populate the form fields
-      fetch(`https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/getRecipe?id=${recipeId}`)
+      fetch(`https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/readRecipe?id=${recipeId}`)
        .then(response => response.json())
        .then(recipeData => {
          document.getElementsByClassName("recipe-form")[0].textContent = recipeData[0].name;

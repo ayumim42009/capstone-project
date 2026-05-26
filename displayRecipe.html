@@ -194,8 +194,7 @@
 
         const modifyButton = document.getElementById("modify");
         modifyButton.addEventListener("click", () => {
-          //need to get the recipe id to pass to the modify page
-        window.location.href = `modifyRecipe.html?id=${recipeData.id}`;
+        window.location.href = `modifyRecipe.html?id=${recipeData[0].id}`;
 });
       
         
