@@ -143,7 +143,8 @@
         //fetch(`https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/readRecipe?id=${recipeId}`)
         //.then(response => response.json())
         //.then(recipeData => {
-          document.getElementsByClassName("recipe-form")[0].textContent = recipeData[0].name;
+          //document.getElementsByClassName("recipe-form")[0].textContent = recipeData[0].name;
+          document.getElementById("recipe-name").value = recipeData[0].name;
           document.getElementsByClassName("ingredient-form")[0].innerHTML = recipeData[0]['ingredients'].map((ingredient,  index) => 
           `<label for="ingredient${index + 1}">Ingredient ${index + 1}:</label>`
           `<input type="text" id="ingredient${index + 1}" name="ingredient${index + 1}" value="${ingredient}">`).join('');
