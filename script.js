@@ -425,6 +425,12 @@ function printRecipeData() {
     addRecipe();
 }
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    const filterMenu = document.getElementById("hamburger-menu");
+    filterMenu.addEventListener("click", toggleFilterMenu);
+});
+
 const redirect = document.querySelector('.recipe-card');
 redirect.addEventListener("click", redirectToDisplay);
 
@@ -434,7 +440,7 @@ redirect.addEventListener("click", redirectToDisplay);
     filterMenu.addEventListener("click", toggleFilterMenu);
 });*/
 
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM ready");
 
     const btn = document.getElementById("hamburger-menu");
@@ -447,4 +453,4 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("clicked");
         sidebar.classList.toggle("hidden");
     });
-});
+});*/
