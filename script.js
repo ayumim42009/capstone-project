@@ -127,7 +127,7 @@ async function getRecipeIdByName(name) {
 }
 
 // This function for the search bar to search for recipes based on the recipe name
-async function search() {
+async function searchForRecipe() {
     const searchInput = document.getElementById("search-bar").value.trim().replace(/\s+/g, ' ');
     const recipe = await getRecipeIdByName(searchInput);
     recipes = await readRecipeData(recipe[0]['id']);
@@ -142,7 +142,7 @@ async function search() {
 }
 
 // This is the event listener for the search bar
-const search = document.getElementById("search-bar").addEventListener("input", search);
+const search = document.getElementById("search-bar").addEventListener("input", searchForRecipe);
 
 // This function sends the recipe data to the database
 async function sendRecipeData(URL, name, ingredients, instructions) {
