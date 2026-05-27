@@ -186,9 +186,11 @@ async function removeRecipeData() {
 async function modifyRecipeData() {
 
     
-    const recipeId = await getRecipeIdByName((sessionStorage.getItem("selectedRecipe")));
-    const recipeData = await readRecipeData(recipeId[0]['id']);
+    //const recipeId = await getRecipeIdByName((sessionStorage.getItem("selectedRecipe")));
+    //const recipeData = await readRecipeData(recipeId[0]['id']);
     const nameData = document.getElementById("recipe-name").value;
+    const recipeId = await getRecipeIdByName(nameData);
+    const recipeData = await readRecipeData(recipeId[0]['id']);
     console.log(nameData);
 
     const ingredientFormData = new FormData(document.querySelector("form[name='ingredient-form']"));
