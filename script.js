@@ -200,7 +200,7 @@ async function modifyRecipeData() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                id: recipeData.id,
+                id: recipeData[0].id,
                 name: nameData,
                 ingredients: ingredientData,
                 instructions: instructionData
