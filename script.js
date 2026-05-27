@@ -129,9 +129,10 @@ async function getRecipeIdByName(name) {
 // This function for the search bar to search for recipes based on the recipe name
 async function searchForRecipe() {
     const searchInput = document.getElementById("search-bar").value.trim().replace(/\s+/g, ' ');
-    const recipeId = await getRecipeIdByName(searchInput);
-    const recipes = await readRecipeData(recipeId[0]['id']);
-        document.getElementById("recipe-grid").innerHTML = recipes.map(recipe => 
+    const recipes = await getAllRecipes();
+    let filteredRecipes = recipes.filter(recipe => recipe.name.toLowerCase().includes(searchInput.toLowerCase()));
+    if(filteredRecipes.length > 0) {
+        document.getElementById("recipe-grid").innerHTML = filteredRecipes.map(recipe => 
           `<div class="recipe-card">
             <img src="${recipe.imageURL || 'images/Lemon-Ricotta-Cookies-5.jpg'}"
               alt="${recipe.name}" class="recipe-img-square">
@@ -139,6 +140,9 @@ async function searchForRecipe() {
             <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
             <a href="displayRecipe.html?id=${recipe.id}" class="view-recipe-link">View Recipe</a>
           </div>`).join('');
+    }   else {
+        document.getElementById("recipe-grid").innerHTML = "<p>No recipes found.</p>";
+    }
 }
 
 // This is the event listener for the search bar
