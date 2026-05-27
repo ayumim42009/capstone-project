@@ -1,3 +1,11 @@
+// This function to show and hide the filter menu when the hamburger menu is clicked
+function toggleFilterMenu() {
+    document.querySelector(".sidebar").classList.toggle("show");
+}
+
+const filterMenu = document.getElementById("hamburger-menu");
+filterMenu.addEventListener("click", toggleFilterMenu);
+
 async function scrape() {
 
     const HTMLURL =
