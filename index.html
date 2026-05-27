@@ -140,60 +140,7 @@
       <div class="recipe-content">
         <h1 class="section-title">My Recipes</h1>
 
-        <div class="recipe-grid">
-
-          <div class="recipe-card">
-            <img src="images/Lemon-Ricotta-Cookies-5.jpg"
-              alt="Lemon Ricotta Cookies with Lemon Glaze"
-              class="recipe-img-square">
-            <h3 class="recipe-card-title">Lemon Ricotta Cookies<div> with Lemon
-                Glaze</h3>
-              <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-              <a href="displayRecipe.html" class="view-recipe-link">View
-                Recipe</a>
-            </div>
-
-            <div class="recipe-card">
-              <div class="recipe-img-square placeholder-img"></div>
-              <h3 class="recipe-card-title">Lorem Ipsum</h3>
-              <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-            </div>
-
-            <div class="recipe-card">
-              <div class="recipe-img-square placeholder-img"></div>
-              <h3 class="recipe-card-title">Lorem Ipsum</h3>
-              <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-            </div>
-
-            <div class="recipe-card">
-              <div class="recipe-img-square placeholder-img"></div>
-              <h3 class="recipe-card-title">Lorem Ipsum</h3>
-              <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-            </div>
-
-            <div class="recipe-card">
-              <div class="recipe-img-square placeholder-img"></div>
-              <h3 class="recipe-card-title">Lorem Ipsum</h3>
-              <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-            </div>
-
-            <div class="recipe-card">
-              <div class="recipe-img-square placeholder-img"></div>
-              <h3 class="recipe-card-title">Lorem Ipsum</h3>
-              <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-            </div>
-
-            <div class="recipe-card">
-              <div class="recipe-img-square placeholder-img"></div>
-              <h3 class="recipe-card-title">Lorem Ipsum</h3>
-              <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-            </div>
-
-            <div class="recipe-card">
-              <div class="recipe-img-square placeholder-img"></div>
-              <h3 class="recipe-card-title">Lorem Ipsum</h3>
-              <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-            </div>
+        <div class="recipe-grid" id="recipe-grid">
 
           </div>
         </div>
@@ -220,11 +167,18 @@
       <script>
       document.addEventListener('DOMContentLoaded', async function() {
         const recipes = await getAllRecipes();
-        for (const recipe of recipes) {
-          console.log(recipe);
-        }
+        document.getElementById("recipe-grid").innerHTML = recipes.map(recipe => 
+          `<div class="recipe-card">
+            <img src="${recipe.imageURL || 'images/Lemon-Ricotta-Cookies-5.jpg'}"
+              alt="${recipe.name}" class="recipe-img-square">
+            <h3 class="recipe-card-title">${recipe.name}</h3>
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+            <a href="displayRecipe.html?id=${recipe.id}" class="view-recipe-link">View Recipe</a>
+          </div>`).join('');
         
 });
+
+    
   </script>
 
     </body>

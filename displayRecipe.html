@@ -179,13 +179,17 @@
     </div>
 
     <script>
+
+      let params = new URLSearchParams(window.location.search);
+
+      let recipeId = params.get("id");
+
       document.addEventListener('DOMContentLoaded', async function() {
+
+        const recipeData = await readRecipeData(recipeId);
+
         const name = sessionStorage.getItem("selectedRecipe"); 
         const id = await getRecipeIdByName(name);
-        console.log(id[0]['id']);
-        const recipeData = await readRecipeData(id[0]['id']);
-        console.log(recipeData[0]['ingredients']);
-        console.log(recipeData[0]['instructions']);
 
         document.getElementsByClassName("recipe-title")[0].textContent = recipeData[0].name;
         document.getElementsByClassName("ingredients-list")[0].innerHTML = recipeData[0]['ingredients'].map(ingredient => `<li>${ingredient}</li>`).join('');

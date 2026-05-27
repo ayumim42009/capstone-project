@@ -370,14 +370,11 @@ if (window.location.pathname.endsWith("recipeForm.html") || window.location.path
 
 function addRecipe() {
     const btn = document.querySelector('.action-btn');
-    const toast = document.getElementById('toast');
 
     // avoid double clicks
     btn.disabled = true;
     btn.textContent = 'Saved!';
     btn.style.backgroundColor = '#5a8a00';
-
-    // redirect to home after 2s
     setTimeout(() => { window.location.href = 'index.html'; }, 1000);
 }
 
