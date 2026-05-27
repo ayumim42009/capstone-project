@@ -82,6 +82,27 @@ async function redirectToDisplay() {
     window.location.href = 'displayRecipe.html';
 }
 
+async function getAllRecipes() {
+    const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/getAllRecipes",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({})
+        });
+
+    if (!response.ok) {
+        const text = await response.text();
+        console.error("Lambda response:", text);
+        throw new Error(`HTTP error ${response.status}: ${text}`);
+    }
+
+    const result = await response.json();
+    console.log("Success:", result);
+    return result;
+}
+
 async function getRecipeIdByName(name) {
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/getRecipeID",
         {
@@ -176,23 +197,6 @@ async function modifyRecipeData() {
 
     const instructionsFormData = new FormData(document.querySelector("form[name='instructions-form']"));
     const instructionData = Array.from(instructionsFormData.values());
-    // testing
-    console.log(recipeData);
-    console.log(recipeData[0]);
-    console.log(recipeData[0]?.id);
-    console.log("---------------------------------");
-    const payload = {
-        id: recipeData[0].id,
-        name: nameData,
-        ingredients: ingredientData,
-        instructions: instructionData
-    };
-
-    console.log(JSON.stringify(payload, null, 2));
-
-    console.log(document.querySelector("form[name='ingredient-form']"));
-    console.log(document.querySelector("form[name='instructions-form']"));
-    //end testing?
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/updateRecipe",
         {
             method: "POST",
@@ -373,14 +377,8 @@ function addRecipe() {
     btn.textContent = 'Saved!';
     btn.style.backgroundColor = '#5a8a00';
 
-    // display toast message
-    toast.classList.add('show');
-
-    // hide toast after 3s
-    setTimeout(() => { toast.classList.remove('show'); }, 3000);
-
     // redirect to home after 2s
-    setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+    setTimeout(() => { window.location.href = 'index.html'; }, 1000);
 }
 
 
@@ -388,15 +386,12 @@ function addRecipe() {
 function printRecipeData() {
     // takes the data from the form
     const nameData = document.getElementById("recipe-name").value;
-    console.log(nameData);
 
     const ingredientFormData = new FormData(document.querySelector("form[name='ingredient-form']"));
     const ingredientData = Array.from(ingredientFormData.values());
-    console.log(ingredientData);
 
     const instructionsFormData = new FormData(document.querySelector("form[name='instructions-form']"));
     const instructionData = Array.from(instructionsFormData.values());
-    console.log(instructionData);
 
     //send the data to the database
     sendRecipeData("", nameData, ingredientData, instructionData);
