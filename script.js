@@ -141,6 +141,7 @@ async function search() {
           </div>`).join('');
 }
 
+// This is the event listener for the search bar
 const search = document.getElementById("search-bar").addEventListener("input", search);
 
 // This function sends the recipe data to the database
