@@ -112,7 +112,7 @@ app.get("/testConnection", async (req, res) => {
     res.json({ message: "OK" });
 });
 
-app.post("/readRecipe", async (req, res) => {
+app.post("/getRecipeID", async (req, res) => {
 
     let connection;
     try {
@@ -125,8 +125,34 @@ app.post("/readRecipe", async (req, res) => {
         });
         // 2. Perform database operations (e.g., query, insert)
         console.log(req.body.name);
-        const [rows, fields] = await connection.execute('SELECT * FROM recipes WHERE name LIKE ?',
+        const [rows, fields] = await connection.execute('SELECT id FROM recipes WHERE name LIKE ?',
             [req.body.name]);
+        res.json(rows);
+    } catch (error) {
+        console.error("Error connecting to database:", error);
+    } finally {
+        // 3. Always close the connection to avoid exhausting RDS limits
+        if (connection) await connection.end();
+    }
+    return res;
+});
+
+app.post("/readRecipe", async (req, res) => {
+
+    let connection;
+    try {
+        // 1. Establish connection
+        connection = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME
+        });
+        // 2. Perform database operations (e.g., query, insert)
+        //req.body.id = req.params.id;
+        console.log(req.body.id);
+        const [rows, fields] = await connection.execute('SELECT * FROM recipes WHERE id LIKE ?',
+            [req.body.id]);
         res.json(rows);
     } catch (error) {
         console.error("Error connecting to database:", error);
@@ -174,7 +200,7 @@ app.post("/addRecipe", async (req, res) => {
 });
 
 
-app.post("/modifyRecipe", async (req, res) => {
+app.post("/updateRecipe", async (req, res) => {
  let connection;
  try {
     // 1. Establish connection
@@ -184,18 +210,47 @@ app.post("/modifyRecipe", async (req, res) => {
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME
     });
+
+    console.log("BODY:", req.body);
+    console.log("ID:", req.body.id);
+    
+    if (
+        req.body.id === undefined ||
+        req.body.name === undefined ||
+        req.body.ingredients === undefined ||
+        req.body.instructions === undefined
+    ) {
+        return res.status(400).json({
+            message: "Missing required fields",
+            body: req.body
+        });
+    }
     // 2. Perform database operations (e.g., query, insert)
         const [rows, fields] = await connection.execute(`UPDATE recipes
-        SET ingredients = ?, instructions = ?
-        WHERE name = ?`,
-        [req.body.ingredients], [req.body.instructions], [req.body.name]);
+        SET ingredients = ?, instructions = ?, name = ?
+        WHERE id = ?`,
+        [
+            JSON.stringify(req.body.ingredients),
+            JSON.stringify(req.body.instructions),
+            req.body.name,
+            req.body.id
+        ]);
+        console.log("affectedRows:", rows.affectedRows);
+        return res.json({
+            message: "OK",
+            affectedRows: rows.affectedRows
+          });
     } catch (error) {
         console.error("Error connecting to database:", error);
+        return res.status(500).json({
+            message: "Internal server error",
+            error: error.message
+        });
+
     } finally {
     // 3. Always close the connection to avoid exhausting RDS limits
      if (connection) await connection.end();
     }
-    res.json({ message: "OK" });
 });
 
 
