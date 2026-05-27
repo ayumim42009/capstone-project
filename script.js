@@ -129,8 +129,8 @@ async function getRecipeIdByName(name) {
 // This function for the search bar to search for recipes based on the recipe name
 async function searchForRecipe() {
     const searchInput = document.getElementById("search-bar").value.trim().replace(/\s+/g, ' ');
-    const recipe = await getRecipeIdByName(searchInput);
-    const recipes = await readRecipeData(recipe[0]['id']);
+    const recipeId = await getRecipeIdByName(searchInput);
+    const recipes = await readRecipeData(recipeId);
         document.getElementById("recipe-grid").innerHTML = recipes.map(recipe => 
           `<div class="recipe-card">
             <img src="${recipe.imageURL || 'images/Lemon-Ricotta-Cookies-5.jpg'}"
@@ -208,7 +208,7 @@ async function modifyRecipeData() {
     //const recipeData = await readRecipeData(recipeId[0]['id']);
     const nameData = document.getElementById("recipe-name").value;
     const recipeId = await getRecipeIdByName(nameData);
-    const recipeData = await readRecipeData(recipeId);
+    const recipeData = await readRecipeData(recipeId[0]['id']);
     console.log(nameData);
 
     const ingredientFormData = new FormData(document.querySelector("form[name='ingredient-form']"));
