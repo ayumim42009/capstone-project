@@ -121,7 +121,7 @@ input[type=text] {
 }
 
 /* sidebar hidden */
-.hidden {
+.sidebar.hidden {
   display: none;
 }
 
