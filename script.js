@@ -3,9 +3,6 @@ function toggleFilterMenu() {
     document.querySelector(".sidebar").classList.toggle("hidden");
 }
 
-const filterMenu = document.getElementById("hamburger-menu");
-filterMenu.addEventListener("click", toggleFilterMenu);
-
 async function scrape() {
 
     const HTMLURL =
@@ -430,3 +427,9 @@ function printRecipeData() {
 
 const redirect = document.querySelector('.recipe-card');
 redirect.addEventListener("click", redirectToDisplay);
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const filterMenu = document.getElementById("hamburger-menu");
+    filterMenu.addEventListener("click", toggleFilterMenu);
+});
