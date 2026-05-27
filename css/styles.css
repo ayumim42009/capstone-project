@@ -114,6 +114,18 @@ input[type=text] {
     padding: 7px;
 }
 
+/* sidebar hidden */
+.hidden {
+  display: none;
+}
+
+/* sidebar shown*/
+.sidebar {
+  display: block;
+}
+
+
+
 /* page content wrapper*/
 .page-content {
   max-width: 780px;
