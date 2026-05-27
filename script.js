@@ -208,7 +208,7 @@ async function modifyRecipeData() {
     //const recipeData = await readRecipeData(recipeId[0]['id']);
     const nameData = document.getElementById("recipe-name").value;
     const recipeId = await getRecipeIdByName(nameData);
-    const recipeData = await readRecipeData(recipeId[0]['id']);
+    const recipeData = await readRecipeData(recipeId);
     console.log(nameData);
 
     const ingredientFormData = new FormData(document.querySelector("form[name='ingredient-form']"));
