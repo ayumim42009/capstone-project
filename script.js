@@ -130,7 +130,7 @@ async function getRecipeIdByName(name) {
 async function searchForRecipe() {
     const searchInput = document.getElementById("search-bar").value.trim().replace(/\s+/g, ' ');
     const recipeId = await getRecipeIdByName(searchInput);
-    const recipes = await readRecipeData(recipeId);
+    const recipes = await readRecipeData(recipeId[0]['id']);
         document.getElementById("recipe-grid").innerHTML = recipes.map(recipe => 
           `<div class="recipe-card">
             <img src="${recipe.imageURL || 'images/Lemon-Ricotta-Cookies-5.jpg'}"
