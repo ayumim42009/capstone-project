@@ -126,6 +126,23 @@ async function getRecipeIdByName(name) {
     return result;
 }
 
+// This function for the search bar to search for recipes based on the recipe name
+async function search() {
+    const searchInput = document.getElementById("search-bar").value.trim().replace(/\s+/g, ' ');
+    const recipe = await getRecipeIdByName(searchInput);
+    recipes = await readRecipeData(recipe[0]['id']);
+        document.getElementById("recipe-grid").innerHTML = recipes.map(recipe => 
+          `<div class="recipe-card">
+            <img src="${recipe.imageURL || 'images/Lemon-Ricotta-Cookies-5.jpg'}"
+              alt="${recipe.name}" class="recipe-img-square">
+            <h3 class="recipe-card-title">${recipe.name}</h3>
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+            <a href="displayRecipe.html?id=${recipe.id}" class="view-recipe-link">View Recipe</a>
+          </div>`).join('');
+}
+
+const search = document.getElementById("search-bar").addEventListener("input", search);
+
 // This function sends the recipe data to the database
 async function sendRecipeData(URL, name, ingredients, instructions) {
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/addRecipe",
