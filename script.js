@@ -221,6 +221,7 @@ async function modifyRecipeData() {
 
     const result = await response.json();
     console.log("Success:", result);
+    actionButton();
     return result;
 }
 ``
