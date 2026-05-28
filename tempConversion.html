@@ -9,13 +9,91 @@
 
   <style>
     /* ── Page-specific styles only ── */
+    
+    .page-content {
+      margin: 0;
+      padding: 2rem 3rem;
+      max-width: 800px;
+    }
+
+
+    h2 {
+      font-family: 'Roboto', sans-serif;
+      color: #2C1A0E;
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    p {
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      font-family: 'Roboto', sans-serif;
+      color: #2C1A0E;
+    }
+
+    ul, ol {
+      margin-left: 2rem;
+      margin-bottom: 1.5rem;
+      font-family: 'Roboto', sans-serif;
+      color: #2C1A0E;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+      line-height: 1.5;
+    }
+
+    .temp-btn {
+      background-color: #992900;
+      color: #F9EFEC;
+      border: none;
+      padding: 6px 16px;
+      margin-right: 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .temp-btn:hover {
+      background-color: #8e2600;
+    }
+
+    .page-content input[type="text"] {
+      float: none;
+      margin: 0 0 10px 10px;
+      display: inline-block;
+      width: 150px;
+    }
+    
+    .input-group {
+      margin-bottom: 0.5rem;
+      font-family: 'Roboto', sans-serif;
+      color: #2C1A0E;
+    }
+
+
+    /* temp input */
+    .temp-input {
+      width: 100%;
+      max-width: 420px;
+      padding: 0.65rem 1rem;
+      border: 1px solid #D4B89A;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-family: 'Roboto', sans-serif;
+      background: #fff;
+      margin: 0;
+    }
   </style>
 </head>
 <body>
 
   <div class="header">
-    <a class="logo" href="index.html">resipi</a>
+    <div class="logo">resipi</div>
     <div class="nav">
+      <a href="index.html">home</a> 
       <a href="recipeForm.html">add recipe</a> 
       <a href="tempConversion.html">conversion</a> 
       <div class="nav-right"> 

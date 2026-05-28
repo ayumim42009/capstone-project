@@ -7,12 +7,117 @@
     <title>Home — resipi</title>
 
     <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+    /* page-specific styles */
+
+    /* main page with a sidebar */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px; 
+      min-height: calc(100vh - 61px);
+    }
+
+    /* main page - left side */
+    .recipe-content {
+      padding: 2rem 4rem;
+    }
+
+    .section-title {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #3D1500;
+      margin-bottom: 2rem;
+    }
+
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 per row */
+      gap: 2rem;
+    }
+
+    .recipe-card {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .recipe-img-square {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 0.8rem;
+    }
+
+    .placeholder-img {
+      background-color: #D6CEC8;
+    }
+
+    .recipe-card-title {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #2C1A0E;
+      margin-bottom: 0.4rem;
+    }
+
+    .stars {
+      color: #992900;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+    }
+
+    /* sidebar */
+    .sidebar {
+      background-color: #EBE3DF; 
+      padding: 2rem;
+      border-left: 1px solid #D6CEC8;
+    }
+
+    .sidebar-title {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2C1A0E;
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-group-title {
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #2C1A0E;
+      margin-bottom: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .filter-label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.9rem;
+      color: #2C1A0E;
+      margin-bottom: 0.6rem;
+      cursor: pointer;
+    }
+
+    .filter-label input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      accent-color: #992900; /* tints when clicked */
+    }
+  </style>
   </head>
   <body>
 
     <div class="header">
-      <a class="logo" href="index.html">resipi</a>
+      <div class="logo">resipi</div>
       <div class="nav">
+        <a href="index.html">home</a>
         <a href="recipeForm.html">add recipe</a>
         <a href="tempConversion.html">conversion</a>
         <div class="nav-right">
@@ -25,7 +130,7 @@
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
           </button>
-          <button class="icon">&#9776;</button>
+          <button class="icon" id="hamburger-menu">&#9776;</button>
         </div>
       </div>
     </div>
@@ -37,11 +142,10 @@
 
         <div class="recipe-grid" id="recipe-grid">
 
+          </div>
         </div>
-      </div>
 
-      <div class="sidebar" id="sidebar">
-        <div class="sidebar-text" id="sidebar-text">
+        <div class="sidebar">
           <h3 class="sidebar-title">Filters</h3>
 
           <h4 class="filter-group-title">Dietary Restrictions:</h4>
@@ -57,11 +161,10 @@
           <label class="filter-label"><input type="checkbox"> Entree</label>
           <label class="filter-label"><input type="checkbox"> Appetizer</label>
         </div>
+
       </div>
 
-    </div>
-
-    <script>
+      <script>
       document.addEventListener('DOMContentLoaded', async function() {
         const recipes = await getAllRecipes();
         document.getElementById("recipe-grid").innerHTML = recipes.map(recipe => 
@@ -78,5 +181,5 @@
     
   </script>
 
-  </body>
-</html>
+    </body>
+  </html>
