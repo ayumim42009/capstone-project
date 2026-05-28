@@ -213,8 +213,8 @@ async function removeRecipeData() {
 async function modifyRecipeData() {
 
     
-    //const recipeId = await getRecipeIdByName((sessionStorage.getItem("selectedRecipe")));
-    //const recipeData = await readRecipeData(recipeId[0]['id']);
+    const recipeId = await getRecipeIdByName((sessionStorage.getItem("selectedRecipe")));
+    const recipeData = await readRecipeData(recipeId[0]['id']);
     const nameData = document.getElementById("recipe-name").value;
     const recipeId = await getRecipeIdByName(nameData);
     const recipeData = await readRecipeData(recipeId[0]['id']);
@@ -454,3 +454,8 @@ redirect.addEventListener("click", redirectToDisplay);
         sidebar.classList.toggle("hidden");
     });
 });*/
+
+function openNav() {
+    document.getElementById("sidebar").classList.toggle("open");
+    document.getElementById("main").classList.toggle("shift");
+}
