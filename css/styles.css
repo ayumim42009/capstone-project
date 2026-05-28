@@ -147,6 +147,9 @@ input[type="submit"] {
   padding: 15px;
   width: 15%;
 }
+.logo:hover {
+  cursor: pointer;
+}
 
 .nav {
   width: 85%;

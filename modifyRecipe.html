@@ -12,9 +12,8 @@
   <body>
 
     <div class="header">
-      <div class="logo">resipi</div>
+      <div class="logo" onclick="window.location.href='index.html'">resipi</div>
       <div class="nav">
-        <a href="index.html">home</a>
         <a href="recipeForm.html">add recipe</a>
         <a href="tempConversion.html">conversion</a>
         <div class="nav-right">
@@ -67,11 +66,6 @@
 
       document.addEventListener('DOMContentLoaded', async function() {
         const recipeData = await readRecipeData(recipeId);
-        // Fetch the recipe data from the database and populate the form fields
-        //fetch(`https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/readRecipe?id=${recipeId}`)
-        //.then(response => response.json())
-        //.then(recipeData => {
-          //document.getElementsByClassName("recipe-form")[0].textContent = recipeData[0].name;
           document.getElementById("recipe-name").value = recipeData[0].name;
           document.getElementById("ingredient-form").innerHTML = recipeData[0]['ingredients'].map((ingredient,  index) => 
           `<label for="ingredient${index + 1}">Ingredient ${index + 1}:</label>
@@ -79,8 +73,6 @@
           document.getElementById("instructions-form").innerHTML = recipeData[0]['instructions'].map((step, index) => 
           `<label for="instructions${index + 1}">Step ${index + 1}:</label>
           <input type="text" id="instructions${index + 1}" name="instructions${index + 1}" value="${step}">`).join('');
-        //});
-
         const modifyButton = document.getElementById("modify-button");
           modifyButton.addEventListener("click", modifyRecipeData);
       });
