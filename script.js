@@ -435,22 +435,7 @@ const redirect = document.querySelector('.recipe-card');
 redirect.addEventListener("click", redirectToDisplay);
 
 
-/*document.addEventListener('DOMContentLoaded', function() {
-    const filterMenu = document.getElementById("hamburger-menu");
-    filterMenu.addEventListener("click", toggleFilterMenu);
-});*/
-
-/*document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM ready");
-
-    const btn = document.getElementById("hamburger-menu");
-    const sidebar = document.querySelector(".sidebar");
-
-    console.log("btn:", btn);
-    console.log("sidebar:", sidebar);
-
-    btn.addEventListener("click", () => {
-        console.log("clicked");
-        sidebar.classList.toggle("hidden");
-    });
-});*/
+function openNav() {
+    document.getElementById("sidebar").classList.toggle("open");
+    document.getElementById("menu-button").classList.toggle("shift");
+}
