@@ -431,8 +431,8 @@ document.addEventListener('DOMContentLoaded', function() {
     filterMenu.addEventListener("click", toggleFilterMenu);
 });
 
-const redirect = document.querySelector('.recipe-card');
-redirect.addEventListener("click", redirectToDisplay);
+//const redirect = document.querySelector('.recipe-card');
+//redirect.addEventListener("click", redirectToDisplay);
 
 
 function openNav() {
