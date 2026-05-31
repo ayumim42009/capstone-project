@@ -66,7 +66,7 @@
         const recipes = await getAllRecipes();
         document.getElementById("recipe-grid").innerHTML = recipes.map(recipe => 
           `<div class="recipe-card">
-            <img src="${recipe.image_url != null ? recipe.image_url : 'images/placeholder.jpg'}"
+            <img src="${recipe.image_url != null ? recipe.image_url : '/images/placeholder.jpg'}"
               alt="${recipe.name}" class="recipe-img-square">
             <h3 class="recipe-card-title">${recipe.name}</h3>
             <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
