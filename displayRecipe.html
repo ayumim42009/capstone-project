@@ -43,7 +43,7 @@
         </div>
 
         <div><img src="" alt=""
-            class="recipe-img"></div>
+            class="recipe-img" id="recipe-img"></div>
       </div>
 
       <div class="steps-section">
@@ -76,7 +76,8 @@
         const id = await getRecipeIdByName(name);
 
         document.getElementsByClassName("recipe-title")[0].textContent = recipeData[0].name;
-        document.getElementsByClassName("recipe-img")[0].innerHTML = `<img src="${recipeData[0].image_url != null ? '/' + recipeData[0].image_url.replace(/^\/+/, '') : '/images/placeholder.jpg'}" alt="${recipeData[0].name}" class="recipe-img">`;
+        document.getElementById("recipe-img").src = recipeData[0].image_url != null ? '/' + recipeData[0].image_url.replace(/^\/+/, '') : '/images/placeholder.jpg';
+        document.getElementById("recipe-img").alt = recipeData[0].name;
         document.getElementsByClassName("ingredients-list")[0].innerHTML = recipeData[0]['ingredients'].map(ingredient => `<li>${ingredient}</li>`).join('');
         document.getElementsByClassName("steps-list")[0].innerHTML = recipeData[0]['instructions'].map((step, index) => `<li><span class="step-num">${index + 1}.</span> ${step}</li>`).join('');
 
