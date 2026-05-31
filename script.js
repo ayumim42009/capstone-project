@@ -139,7 +139,7 @@ async function searchForRecipe() {
     if(filteredRecipes.length > 0) {
         document.getElementById("recipe-grid").innerHTML = filteredRecipes.map(recipe => 
           `<div class="recipe-card">
-            <img src="${recipe.imageURL || 'images/Lemon-Ricotta-Cookies-5.jpg'}"
+             <img src="${recipe.image_url != null ? recipe.image_url : 'images/placeholder.jpg'}"
               alt="${recipe.name}" class="recipe-img-square">
             <h3 class="recipe-card-title">${recipe.name}</h3>
             <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
