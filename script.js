@@ -139,7 +139,7 @@ async function searchForRecipe() {
     if(filteredRecipes.length > 0) {
         document.getElementById("recipe-grid").innerHTML = filteredRecipes.map(recipe => 
           `<div class="recipe-card">
-             <img src="${recipe.image_url != null ? recipe.image_url : '/images/placeholder.jpg'}"
+             <img src="${recipe.image_url != null ? '/' + recipe.image_url.replace(/^\/+/, '') : '/images/placeholder.jpg'}"
               alt="${recipe.name}" class="recipe-img-square">
             <h3 class="recipe-card-title">${recipe.name}</h3>
             <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
@@ -151,7 +151,7 @@ async function searchForRecipe() {
 }
 
 // This is the event listener for the search bar
-const search = document.getElementById("search-bar").addEventListener("input", searchForRecipe);
+const search = document.getElementById("search-button").addEventListener("input", searchForRecipe);
 
 // This function sends the recipe data to the database
 async function sendRecipeData(URL, name, ingredients, instructions) {
