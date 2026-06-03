@@ -192,7 +192,7 @@ async function filterRecipes() {
 }
 
 // This is the event listener for the search bar
-const search = document.getElementById("search-button").addEventListener("click", searchForRecipe);
+const search = document.getElementById("search-button").addEventListener("click", function () { await suggestRecipes(); searchForRecipe(); });
 
 // This function sends the recipe data to the database
 async function sendRecipeData(URL, name, ingredients, instructions) {
@@ -483,3 +483,17 @@ function openNav() {
     document.getElementById("sidebar").classList.toggle("open");
     document.getElementById("menu-button").classList.toggle("shift");
 }
+
+async function suggestRecipes() {
+    const searchInput = document.getElementById("search-bar").value.trim().replace(/\s+/g, ' ');
+    const recipes = await getAllRecipes();
+    let suggestions = recipes.filter(recipe => recipe.name.toLowerCase().startsWith(searchInput.toLowerCase()));
+    if (suggestions.length > 0) {
+        document.getElementsByClassName("suggestions")[0].innerHTML = suggestions.map(suggestion => <li>${suggestion.name}</li>).join('');
+    } else {
+        document.getElementsByClassName("suggestions")[0].innerHTML = "<p>No recipes found.</p>";
+    }
+    return suggestions;
+}
+
+console.log(suggestRecipes());
