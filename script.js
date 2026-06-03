@@ -489,7 +489,7 @@ async function suggestRecipes() {
     const recipes = await getAllRecipes();
     let suggestions = recipes.filter(recipe => recipe.name.toLowerCase().startsWith(searchInput.toLowerCase()));
     if (suggestions.length > 0) {
-        document.getElementsByClassName("suggestions")[0].innerHTML = suggestions.map(suggestion => <li>${suggestion.name}</li>).join('');
+        document.getElementsByClassName("suggestions")[0].innerHTML = suggestions.map(suggestion => `<li>${suggestion.name}</li>`).join('');
     } else {
         document.getElementsByClassName("suggestions")[0].innerHTML = "<p>No recipes found.</p>";
     }
