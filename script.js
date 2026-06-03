@@ -192,7 +192,7 @@ async function filterRecipes() {
 }
 
 // This is the event listener for the search bar
-const search = document.getElementById("search-button").addEventListener("click", function () { await suggestRecipes(); searchForRecipe(); });
+const search = document.getElementById("search-button").addEventListener("click", async function () { await suggestRecipes(); searchForRecipe(); });
 
 // This function sends the recipe data to the database
 async function sendRecipeData(URL, name, ingredients, instructions) {
