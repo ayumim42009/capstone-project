@@ -31,33 +31,62 @@
       </div>
     </div>
 
+    <h1>Edit the Recipe:</h1>
+
     <div class="page-content">
-      <h1>Edit the Recipe:</h1>
-      <h2>Recipe Name</h2>
-      <form name="recipe-form" id="recipe-form">
-        <input type="text" id="recipe-name" name="recipe-name">
-      </form>
-      <div class="heading-row">
-        <h2>Ingredients</h2>
-        <button type="button" id="ingredient-add-button">+</button>
-        <button type="button" id="ingredient-remove-button">-</button>
+      <div class="form-1">
+        <h2>Recipe Name</h2>
+        <form name="recipe-form" id="recipe-form">
+          <input type="text" id="recipe-name" name="recipe-name">
+        </form>
+        <div class="heading-row">
+          <h2>Ingredients</h2>
+          <button type="button" id="ingredient-add-button">+</button>
+          <button type="button" id="ingredient-remove-button">-</button>
+        </div>
+
+        <form name="ingredient-form" id="ingredient-form">
+          <label for="ingredient1">Ingredient 1:</label>
+          <input type="text" id="ingredient1" name="ingredient1">
+        </form>
+        <div class="heading-row"><h2>Instructions</h2> <button type="button"
+            id="instruction-add-button">+</button>
+          <button type="button" id="instruction-remove-button">-</button></div>
+
+        <form id="instructions-form" name="instructions-form">
+          <label for="instructions">Step 1:</label><br>
+          <input type="text" id="instructions" name="instructions">
+        </form>
+
+        <form name="image-form" id="image-form">
+          <h4>Add Image:</h4>
+          <input type="text" id="image-url" name="image-url"
+            placeholder="Enter image URL">
+        </form>
+
+        <br>
+        <button class="action-btn" id="modify-button">
+          Save Changes
+        </button>
       </div>
 
-      <form name="ingredient-form" id="ingredient-form">
-        <label for="ingredient1">Ingredient 1:</label>
-        <input type="text" id="ingredient1" name="ingredient1">
+      <form class="filter-form">
+        <h3 class="sidebar-title">Add Filters:</h3>
+
+        <h4 class="filter-group-title">Dietary Restrictions:</h4>
+        <label class="filter-label"><input type="checkbox">
+          Gluten-free</label>
+        <label class="filter-label"><input type="checkbox"> Vegan</label>
+        <label class="filter-label"><input type="checkbox"> Nut-free</label>
+        <label class="filter-label"><input type="checkbox"> Soy-free</label>
+        <label class="filter-label"><input type="checkbox"> Dairy-free</label>
+
+        <h4 class="filter-group-title">Recipe Type:</h4>
+        <label class="filter-label"><input type="checkbox"> Dessert</label>
+        <label class="filter-label"><input type="checkbox"> Entree</label>
+        <label class="filter-label"><input type="checkbox"> Appetizer</label>
       </form>
-      <div class="heading-row"><h2>Instructions</h2> <button type="button"
-          id="instruction-add-button">+</button>
-        <button type="button" id="instruction-remove-button">-</button></div>
-        
-      <form id="instructions-form" name="instructions-form">
-        <label for="instructions">Step 1:</label><br>
-        <input type="text" id="instructions" name="instructions">
-      </form>
-      <button class="action-btn" id="modify-button">
-        Save Changes
-      </button>
+
     </body>
     <script>
       let params = new URLSearchParams(window.location.search);
@@ -76,5 +105,5 @@
         const modifyButton = document.getElementById("modify-button");
           modifyButton.addEventListener("click", modifyRecipeData);
       });
-    </script>  
+    </script>
   </html>

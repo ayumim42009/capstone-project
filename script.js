@@ -131,21 +131,62 @@ async function getRecipeIdByName(name) {
     return result;
 }
 
+async function getRecipeTag(tag) {
+    const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/getRecipeTag",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                tag: tag
+            })
+        });
+
+    if (!response.ok) {
+        const text = await response.text();
+        console.error("Lambda response:", text);
+        throw new Error(`HTTP error ${response.status}: ${text}`);
+    }
+
+    const result = await response.json();
+    console.log("Success:", result);
+    return result;
+}
+
 // This function for the search bar to search for recipes based on the recipe name
 async function searchForRecipe() {
     const searchInput = document.getElementById("search-bar").value.trim().replace(/\s+/g, ' ');
     const recipes = await getAllRecipes();
     let filteredRecipes = recipes.filter(recipe => recipe.name.toLowerCase().includes(searchInput.toLowerCase()));
-    if(filteredRecipes.length > 0) {
-        document.getElementById("recipe-grid").innerHTML = filteredRecipes.map(recipe => 
-          `<div class="recipe-card">
+    if (filteredRecipes.length > 0) {
+        document.getElementById("recipe-grid").innerHTML = filteredRecipes.map(recipe =>
+            `<div class="recipe-card">
              <img src="${recipe.image_url != null ? '/' + recipe.image_url.replace(/^\/+/, '') : '/images/placeholder.jpg'}"
               alt="${recipe.name}" class="recipe-img-square">
             <h3 class="recipe-card-title">${recipe.name}</h3>
             <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
             <a href="displayRecipe.html?id=${recipe.id}" class="view-recipe-link">View Recipe</a>
           </div>`).join('');
-    }   else {
+    } else {
+        document.getElementById("recipe-grid").innerHTML = "<p>No recipes found.</p>";
+    }
+}
+
+async function filterRecipes() {
+    const filter_label = document.getElementById("filter_label");
+    const recipes = await getRecipeTag();
+    let filteredRecipes = recipes.filter(recipe => recipe.tag.toLowerCase().includes(filter_label.toLowerCase()));
+    if (filteredRecipes.length > 0) {
+        document.getElementById("recipe-grid").innerHTML = filteredRecipes.map(recipe =>
+            `<div class="recipe-card">
+             <img src="${recipe.image_url != null ? '/' + recipe.image_url.replace(/^\/+/, '') : '/images/placeholder.jpg'}"
+              alt="${recipe.name}" class="recipe-img-square">
+            <h3 class="recipe-card-title">${recipe.name}</h3>
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+            <a href="displayRecipe.html?id=${recipe.id}" class="view-recipe-link">View Recipe</a>
+          </div>`).join('');
+    } else {
         document.getElementById("recipe-grid").innerHTML = "<p>No recipes found.</p>";
     }
 }
@@ -212,7 +253,7 @@ async function removeRecipeData() {
 // This function updates the recipe data from the database based on the recipe title
 async function modifyRecipeData() {
 
-    
+
     //const recipeId = await getRecipeIdByName((sessionStorage.getItem("selectedRecipe")));
     //const recipeData = await readRecipeData(recipeId[0]['id']);
     const nameData = document.getElementById("recipe-name").value;
@@ -302,6 +343,8 @@ async function testConnection() {
     console.log("Success:", result);
     return result;
 }
+
+
 
 /**
  * THIS CODE IS FOR MANUAL INPUT OF RECIPE DATA
@@ -395,6 +438,7 @@ if (window.location.pathname.endsWith("recipeForm.html") || window.location.path
     removeInstructionButton.addEventListener("click", removeInstruction);
 
     const submitButton = document.getElementById("submit-button");
+    //add input validation
     submitButton.addEventListener("click", printRecipeData);
 }
 
@@ -426,7 +470,7 @@ function printRecipeData() {
 }
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const filterMenu = document.getElementById("hamburger-menu");
     filterMenu.addEventListener("click", toggleFilterMenu);
 });
