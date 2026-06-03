@@ -195,7 +195,7 @@ async function filterRecipes() {
 const search = document.getElementById("search-button").addEventListener("click", async function () { await suggestRecipes(); searchForRecipe(); });
 
 // This function sends the recipe data to the database
-async function sendRecipeData(URL, name, ingredients, instructions) {
+async function sendRecipeData(URL, name, ingredients, instructions, tags, image_url) {
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/addRecipe",
         {
             method: "POST",
@@ -206,7 +206,9 @@ async function sendRecipeData(URL, name, ingredients, instructions) {
                 url: URL,
                 name: name,
                 ingredients: ingredients,
-                instructions: instructions
+                instructions: instructions,
+                tags: tags,
+                image_url: image_url
             })
         });
 
