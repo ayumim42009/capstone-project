@@ -207,6 +207,23 @@ input[type="submit"] {
   justify-content: center;
 }
 
+/* ─────────────────────────────
+    SEARCH BAR DROPDOWN
+───────────────────────────── */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--panel);
+  border: 1px solid var(--border);
+  border-top: none;
+  display: flex;
+  flex-direction: column;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+}
 
 /* ─────────────────────────────
    SIDEBAR
