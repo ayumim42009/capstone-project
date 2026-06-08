@@ -522,3 +522,9 @@ document.getElementsByClassName("suggestions")[0].addEventListener('click', func
         searchInput.value = e.target.textContent;
     }
 });
+
+document.getElementsByClassName("filter-labels")[0].addEventListener('click', function (e) {
+    if (e.target.tagName === 'LABEL') {
+        getRecipeTag(e.target.textContent);
+    }
+});
