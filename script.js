@@ -467,6 +467,11 @@ function printRecipeData() {
     const instructionData = Array.from(instructionsFormData.values());
 
     //send the data to the database
+    if(nameData === "" || ingredientData.length === 0 || instructionData.length === 0) {
+        const errorMessage = document.getElementById("error-message");
+        errorMessage.textContent = "Please fill out all fields before submitting.";
+        return;
+    }
     sendRecipeData("", nameData, ingredientData, instructionData);
     addRecipe();
 }

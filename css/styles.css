@@ -83,6 +83,14 @@ label {
   color: var(--text-dark);
 }
 
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  background-color: rgb(255, 245, 245);
+}
+
 
 /* ─────────────────────────────
    INPUTS
