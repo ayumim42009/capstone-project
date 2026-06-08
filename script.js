@@ -269,7 +269,7 @@ async function modifyRecipeData() {
 
     const instructionsFormData = new FormData(document.querySelector("form[name='instructions-form']"));
     const instructionData = Array.from(instructionsFormData.values());
-    const tagsFormData = document.getElementById("filter-label").value.split(",").map(tag => tag.trim());
+    const tagsFormData = document.getElementById("filter-label").textContent;
     const tagData = Array.from(tagsFormData);
 
     const imageData = document.getElementById("image-url").value;
@@ -472,7 +472,7 @@ function createRecipeData() {
     const instructionsFormData = new FormData(document.querySelector("form[name='instructions-form']"));
     const instructionData = Array.from(instructionsFormData.values());
 
-    const tagsFormData = document.getElementById("filter-label").value.split(",").map(tag => tag.trim());
+    const tagsFormData = document.getElementById("filter-label").textContent;
     const tagData = Array.from(tagsFormData);
 
     const imageData = document.getElementById("image-url").value;
@@ -523,7 +523,7 @@ document.getElementsByClassName("suggestions")[0].addEventListener('click', func
     }
 });
 
-document.getElementsByClassName("filter-labels")[0].addEventListener('click', function (e) {
+document.getElementsByClassName("filter-label")[0].addEventListener('click', function (e) {
     if (e.target.tagName === 'LABEL') {
         getRecipeTag(e.target.textContent);
     }
