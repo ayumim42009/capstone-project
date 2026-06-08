@@ -269,6 +269,10 @@ async function modifyRecipeData() {
 
     const instructionsFormData = new FormData(document.querySelector("form[name='instructions-form']"));
     const instructionData = Array.from(instructionsFormData.values());
+    const tagsFormData = document.getElementById("filter-label").value.split(",").map(tag => tag.trim());
+    const tagData = Array.from(tagsFormData);
+
+    const imageData = document.getElementById("image-url").value;
     const response = await fetch("https://2spa6g6eub.execute-api.us-east-2.amazonaws.com/test/updateRecipe",
         {
             method: "POST",
@@ -279,7 +283,9 @@ async function modifyRecipeData() {
                 id: recipeData[0].id,
                 name: nameData,
                 ingredients: ingredientData,
-                instructions: instructionData
+                instructions: instructionData,
+                tags: tagData,
+                image_url: imageData
             })
         });
 
@@ -441,7 +447,7 @@ if (window.location.pathname.endsWith("recipeForm.html") || window.location.path
 
     const submitButton = document.getElementById("submit-button");
     //add input validation
-    submitButton.addEventListener("click", printRecipeData);
+    submitButton.addEventListener("click", createRecipeData);
 }
 
 function addRecipe() {
@@ -456,7 +462,7 @@ function addRecipe() {
 
 
 //for testing
-function printRecipeData() {
+function createRecipeData() {
     // takes the data from the form
     const nameData = document.getElementById("recipe-name").value;
 
@@ -466,13 +472,18 @@ function printRecipeData() {
     const instructionsFormData = new FormData(document.querySelector("form[name='instructions-form']"));
     const instructionData = Array.from(instructionsFormData.values());
 
+    const tagsFormData = document.getElementById("filter-label").value.split(",").map(tag => tag.trim());
+    const tagData = Array.from(tagsFormData);
+
+    const imageData = document.getElementById("image-url").value;
+
     //send the data to the database
     if(nameData === "" || ingredientData.length === 0 || instructionData.length === 0) {
         const errorMessage = document.getElementById("error-message");
         errorMessage.textContent = "Please fill out all fields before submitting.";
         return;
     }
-    sendRecipeData("", nameData, ingredientData, instructionData);
+    sendRecipeData("", nameData, ingredientData, instructionData, tagData, imageData);
     addRecipe();
 }
 
