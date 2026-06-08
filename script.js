@@ -515,3 +515,7 @@ async function suggestRecipes() {
 }
 
 console.log(suggestRecipes());
+
+document.getElementsByClassName("suggestions").addEventListener('click', function () {
+     const searchInput = document.getElementById("search-bar").value = suggestions.name;
+});
