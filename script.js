@@ -507,7 +507,7 @@ async function suggestRecipes() {
     const recipes = await getAllRecipes();
     let suggestions = recipes.filter(recipe => recipe.name.toLowerCase().startsWith(searchInput.toLowerCase()));
     if (suggestions.length > 0) {
-        document.getElementsByClassName("suggestions")[0].innerHTML = suggestions.map(suggestion => `<li>${suggestion.name}</li>`).join('');
+        document.getElementsByClassName("suggestions")[0].innerHTML = suggestions.map(suggestion => `<li class="suggestionitem" id="suggestionitem">${suggestion.name}</li>`).join('');
     } else {
         document.getElementsByClassName("suggestions")[0].innerHTML = "<p>No recipes found.</p>";
     }
@@ -516,6 +516,9 @@ async function suggestRecipes() {
 
 console.log(suggestRecipes());
 
-document.getElementsByClassName("suggestions").addEventListener('click', function () {
-     const searchInput = document.getElementById("search-bar").value = suggestions.name;
+document.getElementsByClassName("suggestions")[0].addEventListener('click', function (e) {
+    if (e.target.tagName === 'LI') {
+        const searchInput = document.getElementById("search-bar");
+        searchInput.value = e.target.textContent;
+    }
 });
