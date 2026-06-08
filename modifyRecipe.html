@@ -95,6 +95,7 @@
       document.addEventListener('DOMContentLoaded', async function() {
         const recipeData = await readRecipeData(recipeId);
           document.getElementById("recipe-name").value = recipeData[0].name;
+          document.getElementById("image-url").value = recipeData[0].image_url;
           document.getElementById("ingredient-form").innerHTML = recipeData[0]['ingredients'].map((ingredient,  index) => 
           `<label for="ingredient${index + 1}">Ingredient ${index + 1}:</label>
           <input type="text" id="ingredient${index + 1}" name="ingredient${index + 1}" value="${ingredient}">`).join('');
