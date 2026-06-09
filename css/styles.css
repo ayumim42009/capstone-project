@@ -210,7 +210,12 @@ input[type="submit"] {
 /* ─────────────────────────────
     SEARCH BAR DROPDOWN
 ───────────────────────────── */
+
 .dropdown {
+  display: none;
+}
+
+.dropdown.open {
   position: absolute;
   top: 64%;
   right: var(--search-bar-right, 90px);

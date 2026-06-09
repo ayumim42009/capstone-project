@@ -3,6 +3,10 @@ function toggleFilterMenu() {
     document.querySelector(".sidebar").classList.toggle("hidden");
 }
 
+function toggleSearchMenu() {
+    document.querySelector(".dropdown").classList.toggle("open");
+}
+
 async function scrape() {
 
     const HTMLURL =
@@ -491,6 +495,12 @@ function createRecipeData() {
 document.addEventListener('DOMContentLoaded', function () {
     const filterMenu = document.getElementById("hamburger-menu");
     filterMenu.addEventListener("click", toggleFilterMenu);
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const searchMenu = document.getElementById("search-bar");
+    document.addEventListener("click", (!searchMenu.contains(event.target)) ? toggleSearchMenu : searchMenu.style.display = "none");
+    
 });
 
 //const redirect = document.querySelector('.recipe-card');
