@@ -214,7 +214,7 @@ input[type="submit"] {
   position: absolute;
   top: 64%;
   right: var(--search-bar-right, 90px);
-  height: 20vh;
+  height: auto;
   width:  var(--search-bar-width, 250px); 
   background-color: white;
   border: 1px solid var(--border);
@@ -226,6 +226,8 @@ input[type="submit"] {
   font-style: normal;
   z-index: 1000;
   padding-left: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 /* ─────────────────────────────
