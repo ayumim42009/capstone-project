@@ -485,6 +485,7 @@ function createRecipeData() {
     if (nameData === "" || ingredientData.length === 0 || instructionData.length === 0) {
         const errorMessage = document.getElementById("error-message");
         errorMessage.textContent = "Please fill out all fields before submitting.";
+        errorMessage.classList.add("open");
         return;
     }
     sendRecipeData("", nameData, ingredientData, instructionData, tagData, imageData);
