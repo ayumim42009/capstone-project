@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Temperature Conversion — resipi</title>
-  
-  <link rel="stylesheet" href="css/styles.css">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Conversion — resipi</title>
 
-  <style>
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
     /* ── Page-specific styles only ── */
     
     .page-content {
@@ -71,61 +71,81 @@
       margin: 0;
     }
   </style>
-</head>
-<body>
+  </head>
+  <body>
 
-  <div class="header">
-    <div class="logo" onclick="window.location.href='index.html'">resipi</div>
-    <div class="nav">
-      <a href="recipeForm.html">add recipe</a> 
-      <a href="tempConversion.html">conversion</a> 
-      <div class="nav-right"> 
-        <input type="text" class="search-bar"  id="search-bar" placeholder="Search for recipe"> 
-         <button class="icon" id="search-button">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        </button> 
-         <button class="icon" id="hamburger-menu">&#9776;</button>
-      </div> 
-    </div>
-  </div>
-
-  <div class="page-content">
-
-    
-
-    <p>Enter the temperature in Fahrenheit that you wish to convert to Celsius</p>
-    
-    <br>
-
-    <div class="input-group">
-      <label>Temp (F): <input class="temp-input" id="FTemp" type="text"></label>
-    </div>
-    <div class="input-group">
-      <label>Temp (C):<input class="temp-input" id="CTemp" type="text"></label>
+    <div class="header">
+      <div class="logo" onclick="window.location.href='index.html'">resipi</div>
+      <div class="nav">
+        <a href="recipeForm.html">add recipe</a>
+        <a href="tempConversion.html">conversion</a>
+        <div class="nav-right">
+          <input type="text" class="search-bar" id="search-bar"
+            placeholder="Search for recipe">
+          <button class="icon" id="search-button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <button class="icon" id="hamburger-menu">&#9776;</button>
+        </div>
+      </div>
     </div>
 
-    <button onclick="convertTempToFarenheit()">F&deg</button>
-    <button onclick="convertTempToCelsuis()">C&deg</button>
+    <div class="page-content">
 
+      <p>Enter the temperature in Fahrenheit that you wish to convert to
+        Celsius</p>
+      <div class="error-message" id="error-message"></div>
 
-  </div>
+      <div class="input-group">
+        <label>Temp (F): <input class="temp-input" id="FTemp"
+            type="number"></label>
+      </div>
+      <div class="input-group">
+        <label>Temp (C):<input class="temp-input" id="CTemp"
+            type="number"></label>
+      </div>
 
-<script>
+      <button onclick="convertTempToFarenheit()">F&deg</button>
+      <button onclick="convertTempToCelsuis()">C&deg</button>
+
+    </div>
+
+    <script>
 function convertTempToCelsuis() {
     var FTemp = document.getElementById("FTemp").value;
+    if (FTemp === "" || isNaN(FTemp)) {
+      const errorMessage = document.getElementById("error-message");
+      errorMessage.textContent = "Please enter a valid temperature in Fahrenheit to convert.";
+      errorMessage.classList.add("open");
+      return;
+    } else {
+      const errorMessage = document.getElementById("error-message");
+      errorMessage.classList.remove("open");
+    }
     var CTemp = ((FTemp - 32) / (9/5)).toFixed(2);
     document.getElementById("CTemp").value = CTemp;
 }
 
 function convertTempToFarenheit() {
     var CTemp = document.getElementById("CTemp").value;
+    if (CTemp === "" || isNaN(CTemp)) {
+      const errorMessage = document.getElementById("error-message");
+      errorMessage.textContent = "Please enter a valid temperature in Celsius to convert.";
+      errorMessage.classList.add("open");
+      return;
+    } else {
+      const errorMessage = document.getElementById("error-message");
+      errorMessage.classList.remove("open");
+    }
     var FTemp = ((CTemp * (9/5)) + 32).toFixed(0);
    document.getElementById("FTemp").value = FTemp;
 }
 
 </script>
-</body>
+  </body>
 </html>
