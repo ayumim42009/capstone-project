@@ -211,20 +211,21 @@ input[type="submit"] {
     SEARCH BAR DROPDOWN
 ───────────────────────────── */
 .dropdown {
-  position: relative;
-  top: 100%;
-  right: 0;
-  height: 25%;
-  width: 0;
-  background-color: var(--panel);
+  position: absolute;
+  top: 64%;
+  right: 4.4%;
+  height: 150%;
+  width: 12.25%;
+  background-color: white;
   border: 1px solid var(--border);
   border-top: none;
-  display: flex;
+  display: block;
   flex-direction: column;
   color: black;
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   z-index: 1000;
+  padding-left: 25px;
 }
 
 /* ─────────────────────────────
