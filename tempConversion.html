@@ -93,36 +93,39 @@
   </div>
 
   <div class="page-content">
-    
-    <h1>Recipe Title</h1>
-    
-    <h2>Ingredients</h2>
-    <ul>
-      <li>Ingredient 1</li>
-      <li>Ingredient 2</li>
-      <li>Ingredient 3</li>
-    </ul>
 
-    <button class="temp-btn">C&deg;</button> 
-    <button class="temp-btn">F&deg;</button>
-
-    <h2>Directions</h2>
-    <ol>
-      <li>Preheat the oven to 350 degrees Fahrenheit</li>
-      <li>Mix the ingredients together</li>
-      <li>Bake for 30 minutes</li>
-    </ol>
+    
 
     <p>Enter the temperature in Fahrenheit that you wish to convert to Celsius</p>
     
+    <br>
+
     <div class="input-group">
-      <label>Temp (F): <input class="temp-input" type="text"></label>
+      <label>Temp (F): <input class="temp-input" id="FTemp" type="text"></label>
     </div>
     <div class="input-group">
-      <label>Temp (C):<input class="temp-input" type="text"></label>
+      <label>Temp (C):<input class="temp-input" id="CTemp" type="text"></label>
     </div>
+
+    <button onclick="convertTempToFarenheit()">F&deg</button>
+    <button onclick="convertTempToCelsuis()">C&deg</button>
+
 
   </div>
 
+<script>
+function convertTempToCelsuis() {
+    var FTemp = document.getElementById("FTemp").value;
+    var CTemp = ((FTemp - 32) / (9/5)).toFixed(2);
+    document.getElementById("CTemp").value = CTemp;
+}
+
+function convertTempToFarenheit() {
+    var CTemp = document.getElementById("CTemp").value;
+    var FTemp = ((CTemp * (9/5)) + 32).toFixed(0);
+   document.getElementById("FTemp").value = FTemp;
+}
+
+</script>
 </body>
 </html>
