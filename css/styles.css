@@ -214,7 +214,7 @@ input[type="submit"] {
   position: relative;
   top: 100%;
   right: 0;
-  height: 250 px;
+  height: 25%;
   width: 0;
   background-color: var(--panel);
   border: 1px solid var(--border);
