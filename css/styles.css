@@ -213,9 +213,9 @@ input[type="submit"] {
 .dropdown {
   position: absolute;
   top: 64%;
-  right: 4.4%;
-  height: 150%;
-  width: 12.25%;
+  right: var(--search-bar-right, 90px);
+  height: 20vh;
+  width:  var(--search-bar-width, 250px); 
   background-color: white;
   border: 1px solid var(--border);
   border-top: none;
