@@ -482,7 +482,7 @@ function createRecipeData() {
     const imageData = document.getElementById("image-url").value;
 
     //send the data to the database
-    if(nameData === "" || ingredientData.length === 0 || instructionData.length === 0) {
+    if (nameData === "" || ingredientData.length === 0 || instructionData.length === 0) {
         const errorMessage = document.getElementById("error-message");
         errorMessage.textContent = "Please fill out all fields before submitting.";
         return;
@@ -499,10 +499,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     const searchMenu = document.getElementById("search-bar");
-    document.addEventListener("click", (!searchMenu.contains(event.target)) ? toggleSearchMenu : searchMenu.style.display = "none");
-    
-});
+    document.addEventListener("click", function (event) {
+        event.stopPropagation();
+        if (event.target === searchMenu) {
+            toggleSearchMenu();
+        } else {
+            document.querySelector(".dropdown").classList.remove("open");
+        };
 
+    });
+});
 //const redirect = document.querySelector('.recipe-card');
 //redirect.addEventListener("click", redirectToDisplay);
 
