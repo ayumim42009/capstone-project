@@ -16,7 +16,7 @@
         <a href="recipeForm.html">add recipe</a>
         <a href="tempConversion.html">conversion</a>
         <div class="nav-right">
-          <input type="text" class="search-bar" id="search-bar" placeholder="Search for recipe">
+          <input type="text" id="search-bar" placeholder="Search for recipe">
           <div class="dropdown">
             <div id="myDropdown" class="dropdown-content">
               <ul class="suggestions">
@@ -68,7 +68,7 @@
                 type="checkbox"> Dessert</label>
             <label class="filter-label" id="filter-label"><input
                 type="checkbox"> Entree</label>
-            <label class="filter-label" id="filter-label"><input
+            <label class="filter-label" id="filter_label"><input
                 type="checkbox"> Appetizer</label>
           </div>
         </div>
@@ -80,7 +80,7 @@
         const recipes = await getAllRecipes();
         document.getElementById("recipe-grid").innerHTML = recipes.map(recipe => 
           `<div class="recipe-card">
-           <img src="${recipe.image_url != null ? '/' + recipe.image_url : '/images/placeholder.jpg'}"
+           <img src="${recipe.image_url != null ? '/' + recipe.image_url.replace(/^\/+/, '') : '/images/placeholder.jpg'}"
               alt="${recipe.name}" class="recipe-img-square">
             <h3 class="recipe-card-title">${recipe.name}</h3>
             <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>

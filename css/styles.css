@@ -225,9 +225,15 @@ input[type="submit"] {
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   z-index: 1000;
-  padding-left: 25px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 0.5rem 0.5rem;
+}
+
+.suggestionitem:hover{
+  cursor: pointer;
+  background-color: var(--panel);
+}
+.suggestionitem{
+  list-style-type: none;
 }
 
 /* ─────────────────────────────
