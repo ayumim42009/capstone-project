@@ -112,6 +112,59 @@ app.get("/testConnection", async (req, res) => {
     res.json({ message: "OK" });
 });
 
+app.post("/getAllRecipes", async (req, res) => {
+
+    let connection;
+    try {
+        // 1. Establish connection
+        connection = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME
+        });
+        // 2. Perform database operations (e.g., query, insert)
+        console.log(req.body.name);
+        const [rows, fields] = await connection.execute('SELECT * FROM recipes');
+        return res.json(rows);
+    } catch (error) {
+        console.error("Error connecting to database:", error);
+        return res.status(500).json({
+            message: "Internal server error",
+            error: error.message
+        });
+
+    } finally {
+        // 3. Always close the connection to avoid exhausting RDS limits
+        if (connection) await connection.end();
+    }
+});
+
+app.post("/getRecipeTag", async (req, res) => {
+
+    let connection;
+    try {
+        // 1. Establish connectionc
+        connection = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME
+        });
+        // 2. Perform database operations (e.g., query, insert)
+        console.log(req.body.tag);
+        const [rows, fields] = await connection.execute('SELECT * FROM recipes WHERE tag LIKE ?',
+            [req.body.tag]);
+        res.json(rows);
+    } catch (error) {
+        console.error("Error connecting to database:", error);
+    } finally {
+        // 3. Always close the connection to avoid exhausting RDS limits
+        if (connection) await connection.end();
+    }
+    return res;
+});
+
 app.post("/getRecipeID", async (req, res) => {
 
     let connection;
@@ -178,12 +231,14 @@ app.post("/addRecipe", async (req, res) => {
         console.log("CONNECTED");
         // 2. Perform database operations (e.g., query, insert)
         const [rows, fields] = await connection.execute(`INSERT INTO recipes (url, name, ingredients, instructions)
-            VALUES (?, ?, ?, ?)`,
+            VALUES (?, ?, ?, ?, ?, ?)`,
             [
                 req.body.url,
                 req.body.name,
                 JSON.stringify(req.body.ingredients),
-                JSON.stringify(req.body.instructions)
+                JSON.stringify(req.body.instructions),
+                JSON.stringify(req.body.tag),
+                req.body.image_url
             ]);
         console.log("RESULT:", rows);
     } catch (error) {
@@ -227,9 +282,11 @@ app.post("/updateRecipe", async (req, res) => {
     }
     // 2. Perform database operations (e.g., query, insert)
         const [rows, fields] = await connection.execute(`UPDATE recipes
-        SET ingredients = ?, instructions = ?, name = ?
+        SET tags = ?, image_url = ?, ingredients = ?, instructions = ?, name = ?
         WHERE id = ?`,
         [
+            JSON.stringify(req.body.tags),
+            req.body.image_url,
             JSON.stringify(req.body.ingredients),
             JSON.stringify(req.body.instructions),
             req.body.name,
@@ -373,5 +430,87 @@ app.post("/scrape", async (req, res) => {
 app.get("/ping", (req, res) => {
     res.json({ ok: true });
 });*/
+
+import crypto from 'crypto';
+
+function hashedPassword(password) {
+    return crypto.createHash('sha256').update(password).digest('hex');
+}
+
+app.post("/register", async (req, res) => {
+    let connection;
+    try {
+        connection = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME
+        });
+
+        const { name, email, password } = req.body;
+
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+
+        const [existing] = await connection.execute(
+            'SELECT id FROM users WHERE email = ?', [email]
+        );
+
+        if (existing.length > 0) {
+            return res.status(409).json({ message: "Email already in use" });
+        }
+
+        const hashed = hashedPassword(password);
+
+        await connection.execute(
+            'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
+            [name, email, hashed]
+        );
+
+        res.json({ message: "Account created" });
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({ message: "Register failed", error: error.message });
+    } finally {
+        if (connection) await connection.end();
+    }
+});
+
+app.post("/login", async (req, res) => {
+    let connection;
+    try {
+        connection = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME
+        });
+
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+
+        const hashed = hashedPassword(password);
+
+        const [rows] = await connection.execute(
+            'SELECT * FROM users WHERE email = ? AND password = ?',
+            [email, hashed]
+        );
+
+        if (rows.length === 0) {
+            return res.status(401).json({ message: "Invalid email or password" });
+        }
+
+        res.json({ message: "OK", user: { id: rows[0].id, name: rows[0].name, email: rows[0].email } });
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({ message: "Login failed", error: error.message });
+    } finally {
+        if (connection) await connection.end();
+    }
+});
 
 export const handler = serverless(app);
