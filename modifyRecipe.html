@@ -17,7 +17,8 @@
         <a href="recipeForm.html">add recipe</a>
         <a href="tempConversion.html">conversion</a>
         <div class="nav-right">
-          <input type="text" class="search-bar" id="search-bar" placeholder="Search for recipe">
+          <input type="text" class="search-bar" id="search-bar"
+            placeholder="Search for recipe">
           <button class="icon" id="search-button">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
@@ -74,16 +75,24 @@
         <h3 class="sidebar-title">Add Filters:</h3>
 
         <h4 class="filter-group-title">Dietary Restrictions:</h4>
-        <label class="filter-label" id="filter-label"><input type="checkbox">Gluten-free</label>
-        <label class="filter-label" id="filter-label"><input type="checkbox"> Vegan</label>
-        <label class="filter-label" id="filter-label"><input type="checkbox"> Nut-free</label>
-        <label class="filter-label" id="filter-label"><input type="checkbox"> Soy-free</label>
-        <label class="filter-label" id="filter-label"><input type="checkbox"> Dairy-free</label>
+        <label class="filter-label" id="filter-label"><input
+            type="checkbox">Gluten-free</label>
+        <label class="filter-label" id="filter-label"><input type="checkbox">
+          Vegan</label>
+        <label class="filter-label" id="filter-label"><input type="checkbox">
+          Nut-free</label>
+        <label class="filter-label" id="filter-label"><input type="checkbox">
+          Soy-free</label>
+        <label class="filter-label" id="filter-label"><input type="checkbox">
+          Dairy-free</label>
 
         <h4 class="filter-group-title">Recipe Type:</h4>
-        <label class="filter-label" id="filter-label"><input type="checkbox"> Dessert</label>
-        <label class="filter-label" id="filter-label"><input type="checkbox"> Entree</label>
-        <label class="filter-label" id="filter-label"><input type="checkbox"> Appetizer</label>
+        <label class="filter-label" id="filter-label"><input type="checkbox">
+          Dessert</label>
+        <label class="filter-label" id="filter-label"><input type="checkbox">
+          Entree</label>
+        <label class="filter-label" id="filter-label"><input type="checkbox">
+          Appetizer</label>
       </form>
 
     </body>
@@ -104,6 +113,11 @@
           <input type="text" id="instructions${index + 1}" name="instructions${index + 1}" value="${step}">`).join('');
         const modifyButton = document.getElementById("modify-button");
           modifyButton.addEventListener("click", modifyRecipeData);
+          document.querySelectorAll(".filter-label").forEach(label => {
+            const checkbox = label.querySelector("input[type='checkbox']");
+            if (recipeData[0].tags.includes(label.textContent.trim())) {
+              checkbox.checked = true;
+            }})
       });
     </script>
   </html>
