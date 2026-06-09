@@ -461,7 +461,7 @@ function addRecipe() {
     btn.disabled = true;
     btn.textContent = 'Saved!';
     btn.style.backgroundColor = '#5a8a00';
-    setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+    //UNCOMMENT THIS   setTimeout(() => { window.location.href = 'index.html'; }, 1000);
 }
 
 
@@ -476,8 +476,8 @@ function createRecipeData() {
     const instructionsFormData = new FormData(document.querySelector("form[name='instructions-form']"));
     const instructionData = Array.from(instructionsFormData.values());
 
-    const tagsFormData = document.getElementById("filter-label").textContent;
-    const tagData = Array.from(tagsFormData);
+    const tagsData = document.querySelectorAll('.filter-form input[type="checkbox"]');
+    const recipeTags = Array.from(tagsData).map(checkbox => checkbox.checked);
 
     const imageData = document.getElementById("image-url").value;
 
@@ -488,7 +488,7 @@ function createRecipeData() {
         errorMessage.classList.add("open");
         return;
     }
-    sendRecipeData("", nameData, ingredientData, instructionData, tagData, imageData);
+    sendRecipeData("", nameData, ingredientData, instructionData, recipeTags, imageData);
     addRecipe();
 }
 
