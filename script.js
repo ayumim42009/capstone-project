@@ -461,7 +461,7 @@ function addRecipe() {
     btn.disabled = true;
     btn.textContent = 'Saved!';
     btn.style.backgroundColor = '#5a8a00';
-    //UNCOMMENT THIS   setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+    setTimeout(() => { window.location.href = 'index.html'; }, 1000);
 }
 
 
